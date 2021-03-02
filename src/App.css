@@ -1,0 +1,58 @@
+#App {
+  text-align: center;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+input[type=text] {
+  width: 100%;
+  height: 100%;
+  border: none;
+  padding: 0px;
+  margin: 0px;
+  font-size: 16px;
+  background-color: none;
+  padding-left: 4px;
+}
+
+input[type=text]:focus {
+  border: 0px;
+  outline: none;
+}
+
+#SearchBar {
+  color: black;
+  width: 80%;
+  border-radius: 50px;
+  box-shadow: 0px 0px 5px rgb(0,0,0,0.2);
+  border: 2px solid rgb(200,200,200);
+  z-index: 10;
+  display: flex;
+  height: 35px;
+  max-width: 900px;
+  transition: box-shadow 0.25s;
+  background-color: white;
+}
+
+#vShell{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+}
+
+#SearchBar:hover{
+  box-shadow: 0px 0px 15px rgb(0,0,0,0.4);
+}
+
+
+#VoronoiContainer {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+}
