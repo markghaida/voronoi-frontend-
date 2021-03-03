@@ -5,6 +5,9 @@ import Search from './components/Search.js';
 import { useEffect, useState } from 'react';
 import { timeFormatDefaultLocale } from 'd3';
 
+// const backend = 'http://localhost:3000/bookmarks';
+const backend = 'http://localhost:3000/bookmarks';
+
 
 function App() {
 
@@ -12,7 +15,7 @@ function App() {
   const [ bookmarks, setBookmarks ] = useState([]);
 
   function getBookmarks(searchInput){
-    fetch('http://localhost:3000/bookmarks')
+    fetch(backend)
     .then(response => response.json())
     .then(bookmarkList => filterBookmarks(bookmarkList, searchInput.toLowerCase()))
 }

@@ -6,7 +6,7 @@ import {Delaunay} from "d3-delaunay";
 
 
 //update
-const make_voronio = rhiz => {
+const make_voronio = ( rhiz, setLoci ) => {
   let width = window.innerWidth;
   let height = window.innerHeight;
   width = rhiz.current.clientWidth;
@@ -16,12 +16,11 @@ const make_voronio = rhiz => {
   const context = canvas.node().getContext("2d"); //https://stackoverflow.com/questions/38340082/d3-svg-not-rendering-on-initial-component-render-react
   canvas.attr('width', width);
   canvas.attr('height', height);
-  const particles = Array.from( { length: 150 }, ( ) => [ Math.random( ) * width, Math.random( ) * height ] );
+  const particles = Array.from( { length: 150/2 }, ( ) => [ Math.random( ) * width, Math.random( ) * height ] );
+  setLoci(particles)
 
   const update = ( ) => { //https://observablehq.com/@d3/hover-voronoi?collection=@d3/d3-delaunay <<<<!!!!
-    console.log("running update");
     const delaunay = Delaunay.from( particles );
-    // console.log( delaunay.renderPoints( context ) );
     const voronoi = delaunay.voronoi( [ 5, 5, width - 5, height - 5 ] );
     context.clearRect(0,0,width,height);
     context.beginPath();
@@ -39,38 +38,48 @@ const make_voronio = rhiz => {
     delaunay.renderPoints(context);
     context.fill();
     // delaunay.renderPoints( context );
-    console.log("finished update");
   }
   update( );
+  context.canvas.onmousemove = event => {
+    event.preventDefault();
+    particles[0] = [event.layerX, event.layerY];
+    update();
+  };
 };
 
 const Rhizom = ( { bookmarks } ) => {
 
-  useEffect( ( ) => {
-    make_voronio( rhiz );
+  const [ divLoci, setDivLoci ] = useState( [ ] );
 
+  useEffect( ( ) => {
+    make_voronio( rhiz, setDivLoci );
   }, [ ] );
 
  const allBookmarks = bookmarks.map( bookmark =>
    <div key={bookmark.id}>
       <img src={bookmark.image} />
-      
       <p>URL: {bookmark.url}</p>
       <p>Header Title: {bookmark.h1}</p>
       <p>Body: {bookmark.body}</p>
       <p>Tags:{bookmark.tags.map((tag) => <p>{tag.category_name}</p> )}</p>
-      <button>Remove</button> 
-    
-
+      <button>Remove</button>
     </div>
   );
+
+  const placeOnPlane = divLoci.map( pt =>
+      <div className="bookmarkBox" style={{left: pt[0]-25, top: pt[1]-25 }}>
+        HI!
+      </div>
+
+    )
 
   const rhiz = useRef( );
 
   return(
     <div id="VoronoiContainer">
-      {allBookmarks}
+      { allBookmarks }
       <div id="vShell" ref={rhiz}/>
+      { placeOnPlane }
     </div>
   );
 };
