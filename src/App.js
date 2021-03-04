@@ -15,10 +15,33 @@ function App() {
   const [ bookmarks, setBookmarks ] = useState([]);
 
   function getBookmarks(searchInput){
-    fetch(backend)
-    .then(response => response.json())
-    .then(bookmarkList => filterBookmarks(bookmarkList, searchInput.toLowerCase()))
-}
+    let res = searchInput.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
+    if(res !== null){
+      console.log("fetching this bookmark now")
+      fetch('https://still-caverns-30577.herokuapp.com/bookmarks', {
+      method: 'POST', 
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({url: searchInput, image: "https://miro.medium.com/proxy/0*Qf1s2lG86MjX-Zcv.jpg"}),
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Success:', data);
+        })
+      }else if (searchInput.length === 0){
+        console.log("there is no input in the bar")
+        return true
+      }else{
+        console.log("filtering based off of your input")
+    //if condition below to determine if the searchInput is actually a URL
+    // if so then do a post request to /bookmarks which will then hit the create controller...
+    // if(searchInput)
+        fetch(backend)
+        .then(response => response.json())
+        .then(bookmarkList => filterBookmarks(bookmarkList, searchInput.toLowerCase()))
+      }
+  }
 
   function filterBookmarks(bookmarkList, searchInput){
     // console.log(bookmarkList)
@@ -34,7 +57,9 @@ function App() {
     const filteredList = bookmarkList.filter((bookmark) =>
 
       bookmark.body.toLowerCase().includes(searchInput) || bookmark.url.toLowerCase().includes(searchInput) || bookmark.h1.toLowerCase().includes(searchInput) || bookmark.body.toLowerCase().includes(searchInput) || newArr.includes(searchInput))
-
+      // have a different weight for each (body, h1, url, tag, etc.)
+      // for example if search input matches to the tag, then 10 points
+      // for example if search input matches to the , then 7 points
       setBookmarks(filteredList);
   }
 
