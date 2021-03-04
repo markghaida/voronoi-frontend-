@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { timeFormatDefaultLocale } from 'd3';
 
 // const backend = 'http://localhost:3000/bookmarks';
-const backend = 'http://localhost:3000/bookmarks';
+const backend = 'https://still-caverns-30577.herokuapp.com/bookmarks';
 
 
 function App() {
