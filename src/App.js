@@ -38,31 +38,40 @@ function App() {
     //if condition below to determine if the searchInput is actually a URL
     // if so then do a post request to /bookmarks which will then hit the create controller...
     // if(searchInput)
-        fetch(backend)
-        .then(response => response.json())
-        .then(bookmarkList => filterBookmarks(bookmarkList, searchInput.toLowerCase()))
+        fetch(backend, {
+          method: 'GET', 
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({search: searchInput}),
+          })
+          .then(response => response.json())
+          .then(bookmarkList => {
+            console.log(bookmarkList)
+            setBookmarks(bookmarkList)
+          })
       }
   }
 
-  function filterBookmarks(bookmarkList, searchInput){
-    // console.log(bookmarkList)
+  // function filterBookmarks(bookmarkList, searchInput){
+  //   // console.log(bookmarkList)
 
-    let newArr = [];
-    bookmarkList.forEach((bookmark) => {
-        bookmark.tags.forEach((tag) => {
-            console.log(tag.category_name)
-            newArr.push(tag.category_name.toLowerCase())
-        })
-    })
+  //   let newArr = [];
+  //   bookmarkList.forEach((bookmark) => {
+  //       bookmark.tags.forEach((tag) => {
+  //           console.log(tag.category_name)
+  //           newArr.push(tag.category_name.toLowerCase())
+  //       })
+  //   })
 
-    const filteredList = bookmarkList.filter( ( bookmark ) =>
+  //   const filteredList = bookmarkList.filter( ( bookmark ) =>
 
-      bookmark.body.toLowerCase().includes(searchInput) || bookmark.url.toLowerCase().includes(searchInput) || bookmark.h1.toLowerCase().includes(searchInput) || bookmark.body.toLowerCase().includes(searchInput) || newArr.includes(searchInput))
-      // have a different weight for each (body, h1, url, tag, etc.)
-      // for example if search input matches to the tag, then 10 points
-      // for example if search input matches to the , then 7 points
-      setBookmarks(filteredList);
-  }
+  //     bookmark.body.toLowerCase().includes(searchInput) || bookmark.url.toLowerCase().includes(searchInput) || bookmark.h1.toLowerCase().includes(searchInput) || bookmark.body.toLowerCase().includes(searchInput) || newArr.includes(searchInput))
+  //     // have a different weight for each (body, h1, url, tag, etc.)
+  //     // for example if search input matches to the tag, then 10 points
+  //     // for example if search input matches to the , then 7 points
+  //     setBookmarks(filteredList);
+  // }
 
   return (
     <div id="App">
