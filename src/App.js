@@ -18,12 +18,13 @@ function App() {
     let res = searchInput.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
     if(res !== null){
       console.log("fetching this bookmark now")
-      fetch('https://still-caverns-30577.herokuapp.com/bookmarks', {
+      // fetch('https://still-caverns-30577.herokuapp.com/bookmarks', {
+      fetch('http://localhost:3000/bookmarks', {
       method: 'POST', 
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({url: searchInput, image: "https://miro.medium.com/proxy/0*Qf1s2lG86MjX-Zcv.jpg"}),
+      body: JSON.stringify({url: searchInput}),
       })
         .then(response => response.json())
         .then(data => {
