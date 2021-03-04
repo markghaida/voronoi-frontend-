@@ -54,7 +54,7 @@ function App() {
         })
     })
 
-    const filteredList = bookmarkList.filter((bookmark) =>
+    const filteredList = bookmarkList.filter( ( bookmark ) =>
 
       bookmark.body.toLowerCase().includes(searchInput) || bookmark.url.toLowerCase().includes(searchInput) || bookmark.h1.toLowerCase().includes(searchInput) || bookmark.body.toLowerCase().includes(searchInput) || newArr.includes(searchInput))
       // have a different weight for each (body, h1, url, tag, etc.)

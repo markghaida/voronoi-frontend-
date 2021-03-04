@@ -25,13 +25,13 @@ const make_voronio = ( rhiz, setLoci ) => {
     context.clearRect(0,0,width,height);
     context.beginPath();
     delaunay.render(context);
-    context.strokeStyle = "rgb(230,230,230)";
+    context.strokeStyle = "rgb(240,240,240)";
     context.stroke();
 
     context.beginPath();
     voronoi.render(context);
     voronoi.renderBounds(context);
-    context.strokeStyle = "rgb(150,150,150)";
+    context.strokeStyle = "rgb(190,190,190)";
     context.stroke();
 
     context.beginPath();
@@ -68,7 +68,7 @@ const Rhizom = ( { bookmarks } ) => {
 
   const placeOnPlane = divLoci.map( pt =>
       <div className="bookmarkBox" style={{left: pt[0]-25, top: pt[1]-25 }}>
-        HI!
+        Hi!!
       </div>
 
     )

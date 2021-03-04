@@ -16,7 +16,7 @@ input[type=text] {
   padding: 0px;
   margin: 0px;
   font-size: 16px;
-  background-color: none;
+  background-color: rgba(0,0,0,0);
   padding-left: 4px;
 }
 
@@ -28,25 +28,32 @@ input[type=text]:focus {
 #SearchBar {
   color: black;
   width: 80%;
-  border-radius: 50px;
+  border-radius: 10px;
   box-shadow: 0px 0px 5px rgb(0,0,0,0.2);
-  border: 2px solid rgb(200,200,200);
-  z-index: 10;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );  z-index: 10;
   display: flex;
   height: 35px;
   max-width: 900px;
-  transition: box-shadow 0.25s, opacity 0.5s;
-  background-color: white;
-  opacity: 0.8;
+  transition: box-shadow 0.25s, opacity 0.5s, backdrop-filter 0.5s;
+  /* background-color: white; */
+  /* opacity: 0.5; */
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(20px) saturate(160%) contrast(45%) brightness(140%);
 }
 
+#SearchBar:before{
+
+}
+
+
 #SearchBar:focus-within {
-  opacity: 1;
   box-shadow: 0px 0px 15px rgb(0,0,0,0.4);
+  backdrop-filter: blur(5px) brightness(110%);
 }
 #SearchBar:hover{
-  opacity: 1;
-  box-shadow: 0px 0px 15px rgb(0,0,0,0.4);
+  backdrop-filter: blur(5px) brightness(110%);
+  box-shadow: 0px 0px 10px rgb(0,0,0,0.4);
 }
 
 #vShell{
@@ -56,19 +63,27 @@ input[type=text]:focus {
 }
 
 .bookmarkBox {
-  background-color: rgba(255,255,255,0.8);
+  background-color: rgba(255,255,255,0.2);
   border-radius: 5px;
   position: absolute;
   width: 50px;
   height: 50px;
   border: 1px solid black;
   box-sizing: border-box;
-  transition: background-color 0.25s;
+  /* transition: backdrop-filter 0.5s; */
   text-align: left;
+  transition: box-shadow 0.25s, opacity 0.5s, backdrop-filter 0.5s;
+  backdrop-filter: blur(1px) brightness(110%);
+
 }
 
 .bookmarkBox:hover {
-  background-color: rgba(200,255,255,1);
+  /* background-color: rgba(200,255,255,1); */
+  z-index: 10;
+  backdrop-filter: blur(3px) brightness(120%);
+  box-shadow: 0px 0px 15px rgba(0,0,255,.2);
+
+
   /* display: block; */
 }
 

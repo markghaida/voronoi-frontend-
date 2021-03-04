@@ -16,7 +16,15 @@ const Search = ({searchValue, setSearch, getBookmarks}) => {
   return(
    <div id="SearchBar">
      <div style={{ width:"35px" }}></div>
-     <input ref={ searchInput } placeholder="Honey is yummy 🍯 ..." type="text" value={ searchValue } onChange={ e => handleChange(e) }/>
+     <input
+       ref={ searchInput }
+       placeholder="Honey is yummy 🍯 ..."
+       type="text"
+       value={ searchValue }
+       onChange={ e => handleChange(e) }
+       onMouseEnter={ e => searchInput.current.focus() }
+       onMouseLeave={ e => searchInput.current.blur() }
+       />
      <div style={{ width:"35px" }}></div>
    </div>
  );
