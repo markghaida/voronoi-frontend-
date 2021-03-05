@@ -68,26 +68,66 @@ canvas{
   height: 100%;
 }
 
+.datumPike {
+  /* width: 0;
+  height: 0; */
+  /* display: flex; */
+  /* overflow: visible;
+  */
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  visibility: hidden;
+  padding: 0;
+  margin: 0;
+}
+
+.datumPike:hover{
+  z-index: 10;
+}
+
+.datumPike div{
+  visibility: visible;
+}
+
 .bookmarkBox {
+  margin: 0px;
+  padding: 5px;
   background-color: rgba(255,255,255,0.2);
   border-radius: 5px;
-  position: absolute;
-  width: 50px;
-  height: 50px;
+  /* position: absolute; */
+  min-width: 150px;
+  max-width: 200px;
+  max-height: 300px;
+  top: 50%;
+  left: 50%;
+  /* opacity: 0.5; */
+  -webkit-transform: translate(-40%, -45%);
+  /* translateY(-50%); */
   border: 1px solid black;
+  display: block;
   box-sizing: border-box;
+  overflow: hidden;
   /* transition: backdrop-filter 0.5s; */
   text-align: left;
   transition: box-shadow 0.25s, opacity 0.5s, backdrop-filter 0.5s;
+  /* z-index: 1; */
   backdrop-filter: blur(1px) brightness(110%);
 
 }
 
+.bookBody {
+  font-size: 10px;
+}
+
+.bookMarkGlyph {
+  max-width: 100%;
+  max-height: 100px;
+}
 .bookmarkBox:hover {
-  /* background-color: rgba(200,255,255,1); */
   z-index: 10;
-  backdrop-filter: blur(3px) brightness(120%);
   box-shadow: 0px 0px 15px rgba(0,0,255,.2);
+  backdrop-filter: blur(3px) brightness(120%);
 
 
   /* display: block; */

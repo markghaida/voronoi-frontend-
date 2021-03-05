@@ -35,9 +35,13 @@ function App() {
         })
       }else{
         console.log("filtering based off of your input")
-        fetch(backend)
-        .then(response => response.json())
-        .then(data => filterBookmarks(data, searchValue));
+        let ourInput = searchValue; //holding this incase values changes by the time fetch is done
+        fetch( backend )
+        .then( response => response.json( ) )
+        .then( data => {
+          console.log(ourInput, searchValue );
+          if( ourInput === searchValue ) filterBookmarks( data, searchValue );
+        } );
     }
   }
 
