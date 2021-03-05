@@ -5,8 +5,8 @@ import Search from './components/Search.js';
 import { useEffect, useState } from 'react';
 import { timeFormatDefaultLocale } from 'd3';
 
-const backend = 'http://localhost:3000/bookmarks/search/';
-// const backend = 'https://still-caverns-30577.herokuapp.com/bookmarks';
+// const backend = 'http://localhost:3000/bookmarks/search/';
+const backend = 'https://pure-temple-85885.herokuapp.com/bookmarks/search';
 
 
 function App() {
@@ -19,8 +19,8 @@ function App() {
     let res = searchInput.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
     if(res !== null){
       console.log("fetching this bookmark now")
-      // fetch('https://still-caverns-30577.herokuapp.com/bookmarks', {
-      fetch('http://localhost:3000/bookmarks', {
+      fetch('https://pure-temple-85885.herokuapp.com/bookmarks', {
+      // fetch('http://localhost:3000/bookmarks', {
       method: 'POST', 
       headers: {
         'Content-Type': 'application/json',
@@ -39,26 +39,18 @@ function App() {
     //if condition below to determine if the searchInput is actually a URL
     // if so then do a post request to /bookmarks which will then hit the create controller...
     // if(searchInput)
-        // fetch(backend, {
-        //   method: 'POST', 
-        //   headers: {
-        //     'Content-Type': 'application/json',
-        //   },
-        //   body: JSON.stringify({search: searchInput}),
-        //   })
-        //   .then(response => response.json())
-        //   .then(bookmarkList => {
-        //     console.log(bookmarkList)
-        //     setBookmarks(bookmarkList)
-        //   })
-        
-        // fetch(`http://localhost:3000/bookmarks/search/${searchInput}`)
-        // .then(response => response.json())
-        // .then(data => console.log(data));
-
-        fetch(`http://localhost:3000/bookmarks`)
-        .then(response => response.json())
-        .then(data => filterBookmarks(data, searchInput));
+        fetch(backend, {
+          method: 'POST', 
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({search: searchInput})
+          })
+          .then(response => response.json())
+          .then(bookmarkList => {
+            console.log(bookmarkList)
+            // setBookmarks(bookmarkList)
+          })
     }
   }
 
