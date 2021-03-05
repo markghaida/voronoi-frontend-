@@ -16,7 +16,8 @@ const make_voronio = ( rhiz, setLoci ) => {
   const context = canvas.node().getContext("2d"); //https://stackoverflow.com/questions/38340082/d3-svg-not-rendering-on-initial-component-render-react
   canvas.attr('width', width);
   canvas.attr('height', height);
-  const particles = Array.from( { length: 150/2 }, ( ) => [ Math.random( ) * width, Math.random( ) * height ] );
+  // canvas.attr('position', "absolute");
+  const particles = Array.from( { length: 7 }, ( ) => [ Math.random( ) * width, Math.random( ) * height ] );
   setLoci(particles)
 
   const update = ( ) => { //https://observablehq.com/@d3/hover-voronoi?collection=@d3/d3-delaunay <<<<!!!!
@@ -53,7 +54,7 @@ const Rhizom = ( { bookmarks } ) => {
 
   useEffect( ( ) => {
     make_voronio( rhiz, setDivLoci );
-  }, [ ] );
+  }, [ bookmarks ] );
 
  const allBookmarks = bookmarks.map( bookmark =>
    <div key={bookmark.id}>
@@ -66,11 +67,10 @@ const Rhizom = ( { bookmarks } ) => {
     </div>
   );
 
-  const placeOnPlane = divLoci.map( pt =>
-      <div className="bookmarkBox" style={{left: pt[0]-25, top: pt[1]-25 }}>
+  const placeOnPlane = divLoci.map( ( pt, i ) =>
+      <div key={ i } className="bookmarkBox" style={{left: pt[0]-25, top: pt[1]-25 }}>
         Hi!!
       </div>
-
     )
 
   const rhiz = useRef( );

@@ -25,6 +25,12 @@ input[type=text]:focus {
   outline: none;
 }
 
+canvas{
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
 #SearchBar {
   color: black;
   width: 80%;
@@ -34,7 +40,7 @@ input[type=text]:focus {
   display: flex;
   height: 35px;
   max-width: 900px;
-  transition: box-shadow 0.25s, opacity 0.5s, backdrop-filter 0.5s;
+  transition: box-shadow 0.5s, opacity 0.5s, backdrop-filter 0.5s;
   /* background-color: white; */
   /* opacity: 0.5; */
   background-color: rgba(255, 255, 255, 0.2);
@@ -49,12 +55,12 @@ input[type=text]:focus {
 
 #SearchBar:focus-within {
   box-shadow: 0px 0px 15px rgb(0,0,0,0.4);
-  backdrop-filter: blur(5px) brightness(110%);
+  backdrop-filter: blur(5px) brightness(100%);
 }
-#SearchBar:hover{
+/* #SearchBar:hover{
   backdrop-filter: blur(5px) brightness(110%);
   box-shadow: 0px 0px 10px rgb(0,0,0,0.4);
-}
+} */
 
 #vShell{
   position: absolute;
