@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-const Search = ( { searchValue, setSearch, getBookmarks } ) => {
+const Search = ( { searchValue, setSearch } ) => {
   useEffect( ( ) => {
     searchInput.current.focus( );
   }, [ ] );
@@ -8,7 +8,6 @@ const Search = ( { searchValue, setSearch, getBookmarks } ) => {
 
   const handleChange = e => {
     setSearch( e.target.value )
-    getBookmarks( e.target.value )
   };
 
   const searchInput = useRef( );
