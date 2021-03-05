@@ -42,10 +42,15 @@ function App( ) {
       .then( response => response.json( ) )
       .then( bookmarkList => {
         console.log( bookmarkList );
-        if( ourInput === searchValue ) setBookmarks( bookmarkList );;
+        if( ourInput === searchValue ) filteredList( bookmarkList );
       } );
     }
   }
+  
+  const filteredList = (bookmarkList) => {
+    let filteredBookmarks = bookmarkList.filter((bookmark) => bookmark.score > 9)
+    setBookmarks(filteredBookmarks);
+  } 
 
   const [ searchValue, setSearch ] = useState( "" );
   const [ bookmarks, setBookmarks ] = useState( [ ] );
