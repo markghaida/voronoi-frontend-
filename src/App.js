@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { timeFormatDefaultLocale } from 'd3';
 
 // const backend = 'http://localhost:3000/bookmarks/search/';
-const backend = 'https://pure-temple-85885.herokuapp.com/bookmarks/search';
+const backend = 'https://pure-temple-85885.herokuapp.com/bookmarks';
 
 
 function App( ) {
@@ -20,7 +20,7 @@ function App( ) {
     let res = searchValue.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
     if(res !== null){
       console.log("fetching this bookmark now")
-      fetch( backend, {
+      fetch(backend, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -34,7 +34,7 @@ function App( ) {
     } else {
       console.log("filtering based off of your input")
       let ourInput = searchValue; //holding this incase values changes by the time fetch is done
-      fetch( backend, {
+      fetch( `${backend}/search`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify( { search: searchValue  } )
