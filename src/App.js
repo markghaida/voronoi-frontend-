@@ -5,8 +5,8 @@ import Search from './components/Search.js';
 import { useEffect, useState } from 'react';
 import { timeFormatDefaultLocale } from 'd3';
 
-// const backend = 'http://localhost:3000/bookmarks/search/';
-const backend = 'https://pure-temple-85885.herokuapp.com/bookmarks';
+const backend = 'http://localhost:3000/bookmarks';
+// const backend = 'https://pure-temple-85885.herokuapp.com/bookmarks';
 
 
 function App( ) {
@@ -30,8 +30,19 @@ function App( ) {
       .then( response => response.json( ) )
       .then( data => {
         console.log( 'Success:', data );
+
+        // I have to first determine if the data returned is coming
+        //back as an error
+        if(data[0] === "Url has already been taken"){
+          setErrors(data[0])
+        }else{
+          filteredList(data)
+        }
+        // if it is, setErrors
+          // if it isnt, trigger a fetch and re-render bookmarks that
+            //match the input
       } )
-    } else {
+    }else{
       console.log("filtering based off of your input")
       let ourInput = searchValue; //holding this incase values changes by the time fetch is done
       fetch( `${backend}/search`, {
@@ -42,7 +53,7 @@ function App( ) {
       .then( response => response.json( ) )
       .then( bookmarkList => {
         console.log( bookmarkList );
-        if( ourInput === searchValue ) filteredList( bookmarkList );
+        // if( ourInput === searchValue ) filteredList( bookmarkList );
       } );
     }
   }
@@ -51,7 +62,7 @@ function App( ) {
     let filteredBookmarks = bookmarkList.filter((bookmark) => bookmark.score > 9)
     setBookmarks(filteredBookmarks);
   } 
-
+  const [ errors, setErrors] = useState("")
   const [ searchValue, setSearch ] = useState( "" );
   const [ bookmarks, setBookmarks ] = useState( [ ] );
   useEffect( ( ) => {
@@ -60,7 +71,7 @@ function App( ) {
 
   return (
     <div id="App">
-      <Search searchValue={ searchValue } setSearch={ setSearch }/>
+      <Search searchValue={ searchValue } setSearch={ setSearch } errors={errors}/>
       <Rhizom bookmarks={ bookmarks }/>
     </div>
   );

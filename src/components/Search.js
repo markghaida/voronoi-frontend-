@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-const Search = ( { searchValue, setSearch } ) => {
+const Search = ( { searchValue, setSearch, errors } ) => {
   useEffect( ( ) => {
     searchInput.current.focus( );
   }, [ ] );
@@ -25,6 +25,7 @@ const Search = ( { searchValue, setSearch } ) => {
        onMouseEnter={ e => searchInput.current.focus() }
        onMouseLeave={ e => searchInput.current.blur() }
        />
+      <li style={{ color:"red" }} >{errors}</li>
      <div style={{ width:"35px" }}></div>
    </div>
  );
