@@ -5,11 +5,11 @@ import Search from './components/Search.js';
 import { useEffect, useState } from 'react';
 import { timeFormatDefaultLocale } from 'd3';
 
-const backend = 'http://localhost:3000/bookmarks';
-// const backend = 'https://pure-temple-85885.herokuapp.com/bookmarks';
+// const backend = 'http://localhost:3000/bookmarks';
+const backend = 'https://guarded-wave-40506.herokuapp.com/bookmarks';
 
 
-function App( ) {
+function App( ){
 
   const getBookmarks = async ( ) => {
     console.log(searchValue)
@@ -53,7 +53,7 @@ function App( ) {
       .then( response => response.json( ) )
       .then( bookmarkList => {
         console.log( bookmarkList );
-        // if( ourInput === searchValue ) filteredList( bookmarkList );
+        if( ourInput === searchValue ) filteredList( bookmarkList );
       } );
     }
   }
