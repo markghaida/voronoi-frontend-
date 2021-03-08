@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-const Search = ( { searchValue, setSearch, errors, setSubmit } ) => {
+const Search = ( { searchValue, setSearch, errors } ) => {
   useEffect( ( ) => {
     searchInput.current.focus( );
   }, [ ] );
@@ -10,12 +10,7 @@ const Search = ( { searchValue, setSearch, errors, setSubmit } ) => {
     setSearch( e.target.value )
   };
 
-  const handleClick = e => {
-    setSubmit("clicked")
-  }
-
   const searchInput = useRef( );
-
 
 
   return(
@@ -27,11 +22,11 @@ const Search = ( { searchValue, setSearch, errors, setSubmit } ) => {
        onChange={e => handleChange(e)}
        placeholder="Honey is yummy 🍯 ..."
        type="text"
-      //  onMouseEnter={ e => searchInput.current.focus() }
-      //  onMouseLeave={ e => searchInput.current.blur() }
+       onMouseEnter={ e => searchInput.current.focus() }
+       onMouseLeave={ e => searchInput.current.blur() }
        />
-      <p style={{ color:"red" }} >{errors}</p>
-      {setSubmit ? <button onClick={(e) => handleClick(e)}>Create Bookmark</button> : <button onClick={(e) => handleClick(e)}>Create Bookmark</button>}
+       <br></br>
+      <p style={{color: "red"}}>{errors}</p>
      <div style={{ width:"35px" }}></div>
    </div>
  );
