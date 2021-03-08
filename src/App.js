@@ -19,33 +19,35 @@ function App( ){
     }
     let res = searchValue.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
     if(res !== null){
-      console.log("fetching this bookmark now")
-      fetch(backend, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify( { url: searchValue } ),
-      })
-      .then( response => response.json( ) )
-      .then( data => {
-        console.log( 'Success:', data );
-
-        // I have to first determine if the data returned is coming
-        //back as an error
-        if(data[0] === "Url has already been taken"){
-          setErrors(data[0])
-        }else{
-          filteredList(data)
-        }
-        // if it is, setErrors
-          // if it isnt, trigger a fetch and re-render bookmarks that
-            //match the input
-      } )
-    }else{
-      console.log("filtering based off of your input")
+      setSubmit(true)
+      if (submitButton === "clicked"){
+        console.log("fetching this bookmark now")
+        fetch(backend, {
+        mode: 'no-cors',
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify( { url: searchValue } ),
+        })
+        .then( response => response.json( ) )
+        .then( data => {
+          console.log( 'Success:', data );
+          // I have to first determine if the data returned is coming
+          //back as an error
+          if(data[0] === "Url has already been taken"){
+            setErrors(data[0])
+          }else{
+            filteredList(data)
+          }
+          // if it is, setErrors
+            // if it isnt, trigger a fetch and re-render bookmarks that
+              //match the input
+        } )
+    }}else{
       let ourInput = searchValue; //holding this incase values changes by the time fetch is done
       fetch( `${backend}/search`, {
+        mode: 'no-cors',
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify( { search: searchValue  } )
@@ -57,12 +59,13 @@ function App( ){
       } );
     }
   }
-  
+
   const filteredList = (bookmarkList) => {
     let filteredBookmarks = bookmarkList.filter((bookmark) => bookmark.score > 9)
     setBookmarks(filteredBookmarks);
   } 
   const [ errors, setErrors] = useState("")
+  const [ submitButton, setSubmit] = useState(false)
   const [ searchValue, setSearch ] = useState( "" );
   const [ bookmarks, setBookmarks ] = useState( [ ] );
   useEffect( ( ) => {
@@ -71,7 +74,7 @@ function App( ){
 
   return (
     <div id="App">
-      <Search searchValue={ searchValue } setSearch={ setSearch } errors={errors}/>
+      <Search searchValue={ searchValue } setSearch={ setSearch } errors={errors} setSubmit={setSubmit}/>
       <Rhizom bookmarks={ bookmarks }/>
     </div>
   );
