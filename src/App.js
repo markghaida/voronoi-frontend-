@@ -23,7 +23,7 @@ function App( ){
       if (submitButton === "clicked"){
         console.log("fetching this bookmark now")
         fetch(backend, {
-        mode: 'no-cors',
+        // mode: 'no-cors',
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
