@@ -8,7 +8,6 @@ import { timeFormatDefaultLocale } from 'd3';
 const backend = 'http://localhost:3000/bookmarks';
 // const backend = 'https://guarded-wave-40506.herokuapp.com/bookmarks';
 
-
 function App( ){
 
   const getBookmarks = async ( ) => {
@@ -39,31 +38,32 @@ function App( ){
         }else{
           filteredList(data)
         }
-        // if it is, setErrors
-          // if it isnt, trigger a fetch and re-render bookmarks that
-            //match the input
-      } )
+      })
     }else{
       console.log("filtering based off of your input")
-      let ourInput = searchValue; //holding this incase values changes by the time fetch is done
       fetch( `${backend}/search`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify( { search: searchValue  } )
+        body: JSON.stringify( { 
+          search: searchValue
+
+          } )
         } )
       .then( response => response.json( ) )
-      .then( bookmarkList => {
-        console.log( bookmarkList );
-        if( ourInput === searchValue ) filteredList( bookmarkList );
+      .then( response => {
+        setLastReceipt(response.search);
+        filteredList( response.bookmarks );
       } );
     }
   }
   
   const filteredList = (bookmarkList) => {
     let filteredBookmarks = bookmarkList.filter((bookmark) => bookmark.score > 9)
+    // console.log(filteredBookmarks)
     setBookmarks(filteredBookmarks);
   } 
-  const [ errors, setErrors] = useState("")
+  const [ errors, setErrors] = useState("");
+  const [ lastReceipt, setLastReceipt] = useState("");
   const [ searchValue, setSearch ] = useState( "" );
   const [ bookmarks, setBookmarks ] = useState( [ ] );
   useEffect( ( ) => {
@@ -72,7 +72,7 @@ function App( ){
 
   return (
     <div id="App">
-      <Search searchValue={ searchValue } setSearch={ setSearch } errors={errors}/>
+      <Search searchValue={ searchValue } setSearch={ setSearch } errors={errors} lastReceipt={lastReceipt} resultLength={bookmarks.length}/>
       <Rhizom bookmarks={ bookmarks }/>
     </div>
   );

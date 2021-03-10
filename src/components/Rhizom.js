@@ -68,7 +68,7 @@ const Rhizom = ( { bookmarks } ) => {
       <p>URL: {bookmark.url}</p>
       <p>Header Title: {bookmark.h1}</p>
       <p>Body: {bookmark.body}</p>
-      <p>Tags:{bookmark.tags.map((tag) => <p>{tag.category_name}</p> )}</p>
+      {/* <p>Tags:{bookmark.tags.map((tag) => <p>{tag.category_name}</p> )}</p> */}
       <button>Remove</button>
     </div>
   );

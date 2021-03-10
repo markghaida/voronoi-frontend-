@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-const Search = ( { searchValue, setSearch, errors } ) => {
+const Search = ( { searchValue, setSearch, errors, lastReceipt, resultLength } ) => {
   useEffect( ( ) => {
     searchInput.current.focus( );
   }, [ ] );
@@ -11,10 +11,15 @@ const Search = ( { searchValue, setSearch, errors } ) => {
   };
 
   const searchInput = useRef( );
+  
+  let background; 
+  
+  if (lastReceipt !== searchValue && searchValue !== "") background = "0px 0px 5px rgb(0,200,0,1)"
 
+  if (resultLength === 0 && searchValue !== "") background = "0px 0px 5px rgb(200,0,0,1)"
 
   return(
-   <div id="SearchBar">
+   <div id="SearchBar" style={{boxShadow: background}}>
      <div style={{ width:"35px" }}></div>
      <input
        ref={ searchInput }
@@ -22,8 +27,8 @@ const Search = ( { searchValue, setSearch, errors } ) => {
        onChange={e => handleChange(e)}
        placeholder="Honey is yummy 🍯 ..."
        type="text"
-       onMouseEnter={ e => searchInput.current.focus() }
-       onMouseLeave={ e => searchInput.current.blur() }
+      //  onMouseEnter={ e => searchInput.current.focus() }
+      //  onMouseLeave={ e => searchInput.current.blur() }
        />
        <br></br>
       <p style={{color: "red"}}>{errors}</p>
