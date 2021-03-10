@@ -4,6 +4,7 @@ import {Delaunay} from "d3-delaunay";
 
 
 
+const boolGEN = () => { if( Math.random( ) > 0.5 ) { return false } else { return true } };
 
 //update
 
@@ -61,18 +62,6 @@ const Rhizom = ( { bookmarks } ) => {
     // delaunay.renderPoints( context );
   }
 
-
- const allBookmarks = bookmarks.map( bookmark =>
-   <div key={bookmark.id}>
-      <img src={bookmark.image} />
-      <p>URL: {bookmark.url}</p>
-      <p>Header Title: {bookmark.h1}</p>
-      <p>Body: {bookmark.body}</p>
-      {/* <p>Tags:{bookmark.tags.map((tag) => <p>{tag.category_name}</p> )}</p> */}
-      <button>Remove</button>
-    </div>
-  );
-
   const placeOnPlane = ( ) => plottedPts.map( ( pt, i ) =>
     <div className="datumPike" style={{left: pt[0]-25, top: pt[1]-25 }}>
       <div
@@ -92,7 +81,25 @@ const Rhizom = ( { bookmarks } ) => {
   useEffect( ( ) => {
     let width = rhiz.current.clientWidth;
     let height = rhiz.current.clientHeight;
-    setPts( Array.from( { length: bookmarks.length }, ( ) => [ Math.random( ) * width, Math.random( ) * height ] ) );
+
+    // Array.from( { length: bookmarks.length }, ( ) => [ Math.random( ) * width, Math.random( ) * height ] )
+    setPts(
+      bookmarks.map( ( mark, i ) => {
+        let xStrength = (bookmarks.length - i) / bookmarks.length;
+        console.log( xStrength );
+        let xPos = (xStrength * width) / 2;
+        console.log( xPos );
+        let bool = boolGEN();
+        console.log( bool );
+        if( !bool ) xPos = width - xPos;
+        let yPos = Math.random( ) * height;
+        console.log( xPos, yPos );
+        return [ xPos, yPos ];
+      })  
+    );
+
+
+    // setPts( Array.from( { length: bookmarks.length }, ( ) => [ Math.random( ) * width, Math.random( ) * height ] ) );
   }, [ bookmarks ] );
   useEffect( ( ) => { update( ); setFloatingBookmarks(placeOnPlane)}, [ plottedPts ] );
   // { allBookmarks }
