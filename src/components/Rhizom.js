@@ -12,6 +12,7 @@ const Rhizom = ( { bookmarks } ) => {
 
   const [ vContext, setContext ] = useState( null );
   const [ plottedPts, setPts ] = useState( [ ] );
+  const [ sizing, setSizing ] = useState( [ ] );
   const [ plottedBookmarks, setFloatingBookmarks ] = useState( [ ] );
 
   const make_voronio = ( ) => {
@@ -63,11 +64,13 @@ const Rhizom = ( { bookmarks } ) => {
   }
 
   const placeOnPlane = ( ) => plottedPts.map( ( pt, i ) =>
-    <div className="datumPike" style={{left: pt[0]-25, top: pt[1]-25 }}>
-      <div
-        key={ i }
-        className="bookmarkBox"
-        onClick={()=> window.open(bookmarks[i].url, "_blank")}>
+    <div className="datumPike" key={ bookmarks[i].url } style={{left: pt[0]-25, top: pt[1]-25 }}>
+      <div className="bookmarkBox" onClick={()=> window.open(bookmarks[i].url, "_blank")}
+        style={{ 
+          width: sizing[i][0], 
+          height: sizing[i][1],
+
+        }}>
         <h4>{ bookmarks[i].h1 }</h4>
         <img className="bookMarkGlyph" src={ bookmarks[ i ].image }/>
           <p className="bookBody">{ bookmarks[i].body }</p>
@@ -83,20 +86,38 @@ const Rhizom = ( { bookmarks } ) => {
     let height = rhiz.current.clientHeight;
 
     // Array.from( { length: bookmarks.length }, ( ) => [ Math.random( ) * width, Math.random( ) * height ] )
+    let last_x;
+    let sizes = [ ];
     setPts(
       bookmarks.map( ( mark, i ) => {
         let xStrength = (bookmarks.length - i) / bookmarks.length;
-        console.log( xStrength );
+        // console.log( xStrength );
         let xPos = (xStrength * width) / 2;
-        console.log( xPos );
+        // console.log( xPos );
+        console.log( mark.score );
+        //----------
+        let [ bW, bH ] = [ ( mark.score / 40 ) * 300, ( mark.score / 40 ) * 300 ];
+        sizes.push( [ bW, bH ] );
+        //----------
         let bool = boolGEN();
-        console.log( bool );
         if( !bool ) xPos = width - xPos;
         let yPos = Math.random( ) * height;
-        console.log( xPos, yPos );
+        // yPos = height/2;
+        if( last_x ) {
+          if( Math.abs( last_x - xPos ) < 150 ) {
+            console.log( "-------------", bool );
+            console.log( last_x, xPos );
+            if( bool ) xPos -= 350
+            else xPos += 350;
+            console.log( last_x, xPos );
+          };
+        };
+        last_x = xPos;
+        // console.log( xPos, yPos );
         return [ xPos, yPos ];
       })  
     );
+    setSizing( sizes );
 
 
     // setPts( Array.from( { length: bookmarks.length }, ( ) => [ Math.random( ) * width, Math.random( ) * height ] ) );

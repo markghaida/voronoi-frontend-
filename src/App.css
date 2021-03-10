@@ -80,6 +80,7 @@ canvas{
   visibility: hidden;
   padding: 0;
   margin: 0;
+  transition: left 1.25s, top 1.25s, width 1s, height 1s, fontSize 1s;
 }
 
 .datumPike:hover{
@@ -96,9 +97,9 @@ canvas{
   background-color: rgba(255,255,255,0.2);
   border-radius: 5px;
   /* position: absolute; */
-  min-width: 150px;
-  max-width: 200px;
-  max-height: 300px;
+  /* min-width: 150px; */
+  /* max-width: 200px; */
+  /* max-height: 300px; */
   top: 50%;
   left: 50%;
   /* opacity: 0.5; */

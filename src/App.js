@@ -58,7 +58,7 @@ function App( ){
   }
   
   const filteredList = (bookmarkList) => {
-    let filteredBookmarks = bookmarkList.filter((bookmark) => bookmark.score > -1)
+    let filteredBookmarks = bookmarkList.filter((bookmark) => bookmark.score > 9)
     // console.log(filteredBookmarks)
     setBookmarks(filteredBookmarks);
   } 
