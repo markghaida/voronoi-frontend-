@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react';
 import { timeFormatDefaultLocale } from 'd3';
 
 const backend = 'http://localhost:3000/bookmarks';
-// const backend = 'https://guarded-wave-40506.herokuapp.com/bookmarks';
 
 function App( ){
 
@@ -17,8 +16,7 @@ function App( ){
       return setBookmarks( [ ] );
     }
     let res = searchValue.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
-    if( res !== null ){
-      
+    if( res !== null ){ 
       console.log("fetching this bookmark now")
       fetch(backend, {
       method: 'POST',
@@ -33,11 +31,15 @@ function App( ){
 
         // I have to first determine if the data returned is coming
         //back as an error
+        setSearch("")
         if(data[0] === "Url has already been taken"){
-          setErrors( data[ 0 ] )
-        }else{
-          filteredList( data )
+          // setErrors( data[ 0 ] )
         }
+
+        
+        // else{
+        //   filteredList( data )
+        // }
       })
     }else{
       console.log("filtering based off of your input")
@@ -57,7 +59,7 @@ function App( ){
   } 
   const [ errors, setErrors ] = useState( "" );
   const [ lastReceipt, setLastReceipt ] = useState( "" );
-  const [ searchValue, setSearch ] = useState( "ga" );
+  const [ searchValue, setSearch ] = useState( "po" );
   const [ bookmarks, setBookmarks ] = useState( [ ] );
   useEffect( ( ) => {
     getBookmarks( );
