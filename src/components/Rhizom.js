@@ -120,17 +120,14 @@ const Rhizom = ( { bookmarks } ) => {
             if( xPos + ( bW / 2 ) > leftMost ) {
               xPos = leftMost - bW/2;
               leftMost = xPos - bW/2 - 15;
-              console.log( ">>", leftMost );
-            } else {
-              leftMost = xPos - bW/2 - 15;
-            }
+            } else leftMost = xPos - bW/2 - 15;
           }
-          
           else {
-            if( !bool && xPos + ( bW / 2 ) < rightMost ) {
-              xPos      = rightMost + bW / 2;
-              rightMost = xPos + bW / 2 + 15;
-              console.log( ">>", leftMost );
+            if( !bool ) {
+              if( xPos + ( bW / 2 ) < rightMost ) {
+                xPos      = rightMost + bW / 2;
+                rightMost = xPos + bW / 2 + 15;
+              } else rightMost = xPos + bW / 2 + 15;
             }
           }
         }
