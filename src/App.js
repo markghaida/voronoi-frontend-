@@ -12,12 +12,12 @@ function App( ){
 
   const getBookmarks = async ( ) => {
     console.log(searchValue)
-    if (searchValue.length === 0){
+    if ( searchValue.length === 0 ){
       console.log("there is no input in the bar")
       return setBookmarks( [ ] );
     }
     let res = searchValue.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
-    if(res !== null){
+    if( res !== null ){
       
       console.log("fetching this bookmark now")
       fetch(backend, {
@@ -34,37 +34,30 @@ function App( ){
         // I have to first determine if the data returned is coming
         //back as an error
         if(data[0] === "Url has already been taken"){
-          setErrors(data[0])
+          setErrors( data[ 0 ] )
         }else{
-          filteredList(data)
+          filteredList( data )
         }
       })
     }else{
       console.log("filtering based off of your input")
-      fetch( `${backend}/search`, {
+      fetch( `${ backend }/search`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify( { 
-          search: searchValue
-
-          } )
+        body: JSON.stringify( { search: searchValue } )
         } )
       .then( response => response.json( ) )
-      .then( response => {
-        setLastReceipt(response.search);
-        filteredList( response.bookmarks );
-      } );
+      .then( response => { setLastReceipt( response.search ); filteredList( response.bookmarks ); } );
     }
   }
   
-  const filteredList = (bookmarkList) => {
-    let filteredBookmarks = bookmarkList.filter((bookmark) => bookmark.score > 9)
-    // console.log(filteredBookmarks)
-    setBookmarks(filteredBookmarks);
+  const filteredList = ( bookmarkList ) => {
+    let filteredBookmarks = bookmarkList.filter( ( bookmark ) => bookmark.score > 9 )
+    setBookmarks( filteredBookmarks );
   } 
-  const [ errors, setErrors] = useState("");
-  const [ lastReceipt, setLastReceipt] = useState("");
-  const [ searchValue, setSearch ] = useState( "" );
+  const [ errors, setErrors ] = useState( "" );
+  const [ lastReceipt, setLastReceipt ] = useState( "" );
+  const [ searchValue, setSearch ] = useState( "ga" );
   const [ bookmarks, setBookmarks ] = useState( [ ] );
   useEffect( ( ) => {
     getBookmarks( );
@@ -72,7 +65,12 @@ function App( ){
 
   return (
     <div id="App">
-      <Search searchValue={ searchValue } setSearch={ setSearch } errors={errors} lastReceipt={lastReceipt} resultLength={bookmarks.length}/>
+      <Search searchValue={ searchValue }
+      setSearch={ setSearch } 
+      errors={ errors } 
+      lastReceipt={ lastReceipt } 
+      resultLength={ bookmarks.length }
+      />
       <Rhizom bookmarks={ bookmarks }/>
     </div>
   );

@@ -18,8 +18,10 @@ const Search = ( { searchValue, setSearch, errors, lastReceipt, resultLength } )
 
   if (resultLength === 0 && searchValue !== "") background = "0px 0px 5px rgb(200,0,0,1)"
 
+  let top = "0%";
+  if( searchValue ) top = "25%";
   return(
-   <div id="SearchBar" style={{boxShadow: background}}>
+   <div id="SearchBar" style={{boxShadow: background, top: top}}>
      <div style={{ width:"35px" }}></div>
      <input
        ref={ searchInput }

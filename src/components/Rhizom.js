@@ -64,14 +64,20 @@ const Rhizom = ( { bookmarks } ) => {
   }
 
   const placeOnPlane = ( ) => plottedPts.map( ( pt, i ) =>
-    <div className="datumPike" key={ bookmarks[i].url } style={{left: pt[0]-25, top: pt[1]-25 }}>
+    <div className="datumPike" key={ bookmarks[i].url } style={{
+      left: ( pt[0] - 25 ) - sizing[i][0]/2, 
+      top: pt[1]-25, 
+      zIndex: bookmarks.length - i 
+    }}>
       <div className="bookmarkBox" onClick={()=> window.open(bookmarks[i].url, "_blank")}
         style={{ 
-          width: sizing[i][0], 
-          height: sizing[i][1],
-
+          maxWidth: sizing[i][0], 
+          maxHeight: sizing[i][1],
         }}>
-        <h4>{ bookmarks[i].h1 }</h4>
+        <div className="bookmarkHeader" style={{
+          fontSize:`${(bookmarks[i].score/bookmarks[0].score*14)+6}px`
+          }}>
+          { bookmarks[i].h1 }</div>
         <img className="bookMarkGlyph" src={ bookmarks[ i ].image }/>
           <p className="bookBody">{ bookmarks[i].body }</p>
       </div>
@@ -86,8 +92,11 @@ const Rhizom = ( { bookmarks } ) => {
     let height = rhiz.current.clientHeight;
 
     // Array.from( { length: bookmarks.length }, ( ) => [ Math.random( ) * width, Math.random( ) * height ] )
-    let last_x;
+    
+    let first_X, leftMost, rightMost, topMost, bottomMost, highestScore;
     let sizes = [ ];
+    if( bookmarks[0] ) highestScore = bookmarks[0].score;
+
     setPts(
       bookmarks.map( ( mark, i ) => {
         let xStrength = (bookmarks.length - i) / bookmarks.length;
@@ -96,24 +105,35 @@ const Rhizom = ( { bookmarks } ) => {
         // console.log( xPos );
         console.log( mark.score );
         //----------
-        let [ bW, bH ] = [ ( mark.score / 40 ) * 300, ( mark.score / 40 ) * 300 ];
+        let [ bW, bH ] = [ ( mark.score / highestScore ) * 300, ( mark.score / highestScore ) * 300 ];
         sizes.push( [ bW, bH ] );
         //----------
         let bool = boolGEN();
         if( !bool ) xPos = width - xPos;
         let yPos = Math.random( ) * height;
         // yPos = height/2;
-        if( last_x ) {
-          if( Math.abs( last_x - xPos ) < 150 ) {
-            console.log( "-------------", bool );
-            console.log( last_x, xPos );
-            if( bool ) xPos -= 350
-            else xPos += 350;
-            console.log( last_x, xPos );
-          };
-        };
-        last_x = xPos;
-        // console.log( xPos, yPos );
+        
+        if( !leftMost || !rightMost ) [ rightMost, leftMost ] = [ width/2 + bW/2 + 15, width/2 - bW/2 - 15 ];
+        else{
+          // console.log("right!!")
+          if( bool ) {
+            if( xPos + ( bW / 2 ) > leftMost ) {
+              xPos = leftMost - bW/2;
+              leftMost = xPos - bW/2 - 15;
+              console.log( ">>", leftMost );
+            } else {
+              leftMost = xPos - bW/2 - 15;
+            }
+          }
+          
+          else {
+            if( !bool && xPos + ( bW / 2 ) < rightMost ) {
+              xPos      = rightMost + bW / 2;
+              rightMost = xPos + bW / 2 + 15;
+              console.log( ">>", leftMost );
+            }
+          }
+        }
         return [ xPos, yPos ];
       })  
     );

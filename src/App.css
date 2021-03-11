@@ -39,8 +39,10 @@ canvas{
   border: 1px solid rgba( 255, 255, 255, 0.18 );  z-index: 10;
   display: flex;
   height: 35px;
+  position: relative;
+  /* top: 25%; */
   max-width: 900px;
-  transition: box-shadow 0.05s, opacity 0.5s, backdrop-filter 0.5s;
+  transition: box-shadow 0.05s, opacity 0.5s, backdrop-filter 0.5s, top 1.5s;
   /* background-color: white; */
   /* opacity: 0.5; */
   background-color: rgba(255, 255, 255, 0.2);
@@ -52,10 +54,17 @@ canvas{
 
 }
 
+.bookmarkHeader {
+  font-size: 16px;
+  /* color: red; */
+  max-height: 60px;
+  overflow: hidden;
+  margin: 0px 0px 5px 0px;
+}
 
 #SearchBar:focus-within {
   box-shadow: 0px 0px 15px rgb(0,0,0,0.4);
-  backdrop-filter: blur(5px) brightness(100%);
+  backdrop-filter: blur(10px) brightness(200%);
 }
 /* #SearchBar:hover{
   backdrop-filter: blur(5px) brightness(110%);
@@ -80,7 +89,7 @@ canvas{
   visibility: hidden;
   padding: 0;
   margin: 0;
-  transition: left 1.25s, top 1.25s, width 1s, height 1s, fontSize 1s;
+  transition: left 1.25s, top 1.25s;
 }
 
 .datumPike:hover{
@@ -103,7 +112,7 @@ canvas{
   top: 50%;
   left: 50%;
   /* opacity: 0.5; */
-  -webkit-transform: translate(-40%, -45%);
+  -webkit-transform: translate(0%, -50%);
   /* translateY(-50%); */
   border: 1px solid black;
   display: block;
@@ -111,9 +120,10 @@ canvas{
   overflow: hidden;
   /* transition: backdrop-filter 0.5s; */
   text-align: left;
-  transition: box-shadow 0.25s, opacity 0.5s, backdrop-filter 0.5s;
+  transition: box-shadow 0.25s, opacity 0.5s, backdrop-filter 0.5s, max-width 1.25s, max-height 1.25s, fontSize 1s;
   /* z-index: 1; */
-  backdrop-filter: blur(1px) brightness(110%);
+  backdrop-filter: blur(5px) brightness(200%);
+  backdrop-filter: blur(1px) brightness(100%);
 
 }
 
@@ -123,12 +133,12 @@ canvas{
 
 .bookMarkGlyph {
   max-width: 100%;
-  max-height: 100px;
+  /* max-height: 100px; */
 }
 .bookmarkBox:hover {
-  z-index: 10;
+  z-index: 100;
   box-shadow: 0px 0px 15px rgba(0,0,255,.2);
-  backdrop-filter: blur(3px) brightness(120%);
+  backdrop-filter: blur(3px) brightness(300%);
 
 
   /* display: block; */
