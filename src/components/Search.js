@@ -27,7 +27,7 @@ const Search = ( { searchValue, setSearch, errors, lastReceipt, resultLength } )
        ref={ searchInput }
        value={ searchValue }
        onChange={e => handleChange(e)}
-       placeholder="Honey is yummy 🍯 ..."
+       placeholder="Honeycomb 🍯..."
        type="text"
       //  onMouseEnter={ e => searchInput.current.focus() }
       //  onMouseLeave={ e => searchInput.current.blur() }
