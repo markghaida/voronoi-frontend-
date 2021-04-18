@@ -1,4 +1,3 @@
-# honeycomb-frontend-
 <img src="Comb.png" alt="Honeycomb" width="1200"/>
 
 `Honeycomb🐝` provides a way to search for all your bookmarks instead of sifting through folder after folder. The app's mission is to change the way we locate a saved bookmark.
