@@ -31,34 +31,6 @@ Once a bookmark is saved, simply begin searching for the website's name.  Honeyc
 
 <img src="How to Search For a Bookmark.gif" alt="create request 3" width="800"/>
 
-### Fulfilling Requests
-
-Users are able to view all the current pending requests and filter them by distance away. If they have all the items requested, they may accept the request. Once accepted a chat will be assigned to the recipient and the donor.
-
-<img src="./assets/accept-request.gif" alt="accept request" width="800"/>
-
-Once accepted, the status for the request will now show as accepted for both the recipient and donor.
-
-<img src="./assets/accepted-request.gif" alt="accepted request" width="800"/>
-
-Within each chat, users are able to see the items requested, as well as a map showing the distance between the two users. The map uses [GoogleMap](https://developers.google.com/maps)'s API and pinpoints both users' geolocations.
-
-<img src="./assets/chat-features.gif" alt="chat features" width="800"/>
-
-The recipient and donor are able to chat in real-time due to WebSocket integration. They may also send emojis. 
-
-<img src="./assets/chat.gif" alt="chat" width="800"/>
-
-Once the exchange has been made, either user can mark the request as fulfilled. Doing so will be reflected for both the recipient and donor. The status of the request on their profile pages will be updated to fulfilled.
-
-<img src="./assets/fulfilled-request.gif" alt="fulfilled request" width="800"/>
-
-### Accessibility
-
-Honeycomb🐝 was created with all custom CSS and the use of media queries, making the app is mobile friendly. The sizing of all elements adjust depending on the window size.
-
-<img src="./assets/mobile.gif" alt="mobile friendly" width="800"/>
-
 ## License
 
 The [MIT](https://choosealicense.com/licenses/mit/) License
