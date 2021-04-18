@@ -1,2 +1,2 @@
 # voronoi-frontend-
-<img src="https://imgur.com/zGiQlGb" alt="Honeycomb" width="1200"/>
+<img src="" alt="Honeycomb" width="1200"/>
