@@ -29,7 +29,7 @@ Users are able to save a bookmark.  Once you navigate to a website that you are 
 
 Once a bookmark is saved, simply begin searching for the website's name.  Honeycomb scrapes the bookmark's h1 title, body text, and main image.
 
-<img src="./assets/complete-request.gif" alt="create request 3" width="800"/>
+<img src="How to Search For a Bookmark.mov" alt="create request 3" width="800"/>
 
 ### Fulfilling Requests
 
