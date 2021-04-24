@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 const Search = ( { searchValue, setSearch, errors, lastReceipt, resultLength } ) => {
   useEffect( ( ) => {
     searchInput.current.focus( );
+    document.addEventListener('keydown', e => {searchInput.current.focus( ) } );
   }, [ ] );
   // const [ input, setInput ] = useState( "" )
 
@@ -11,14 +12,14 @@ const Search = ( { searchValue, setSearch, errors, lastReceipt, resultLength } )
   };
 
   const searchInput = useRef( );
-  
-  let background; 
-  
+
+  let background;
+
   if (lastReceipt !== searchValue && searchValue !== "") background = "0px 0px 5px rgb(0,200,0,1)"
 
   if (resultLength === 0 && searchValue !== "") background = "0px 0px 5px rgb(200,0,0,1)"
 
-  let top = "0%";
+  let top = "25%";
   if( searchValue ) top = "25%";
   return(
    <div id="SearchBar" style={{boxShadow: background, top: top}}>
