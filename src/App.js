@@ -5,8 +5,8 @@ import Search from './components/Search.js';
 import { useEffect, useState } from 'react';
 import { timeFormatDefaultLocale } from 'd3';
 
-// const backend = 'http://localhost:3000/bookmarks';
-const backend = 'https://honeycomb-app.herokuapp.com/bookmarks';
+const backend = 'http://localhost:3000/bookmarks';
+// const backend = 'https://honeycomb-app.herokuapp.com/bookmarks';
 
 function App( ){
 
