@@ -83,7 +83,8 @@ canvas{
     border-radius: 0px;
     position: absolute;
     position: fixed;
-    height: calc( 35px + var(--safeAreaBtm) )
+    /* height: calc( 35px +  ); */
+    padding-bottom: var(--safeAreaBtm);
   }
 }
 
