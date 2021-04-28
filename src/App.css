@@ -178,7 +178,7 @@ canvas{
   }
 
   #VoronoiContainer {
-    height: calc( 100% - var(--safeAreaBtm) - 45px );
+    height: calc( 100% - var(--safeAreaBtm) - 47px );
     top: 0;
   }
 
