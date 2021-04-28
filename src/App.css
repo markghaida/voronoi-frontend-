@@ -3,7 +3,7 @@
 
 
 :root {
-  --mainColor: black;
+  --mainColor: blue;
   --backdropColor: white;
   --safeAreaBtm: env(safe-area-inset-bottom);
   --safeAreaTop: env(safe-area-inset-top);

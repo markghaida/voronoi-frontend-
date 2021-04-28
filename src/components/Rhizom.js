@@ -43,6 +43,8 @@ const Rhizom = ( { bookmarks } ) => {
 
     let width = rhiz.current.clientWidth;
     let height = rhiz.current.clientHeight;
+    height = rhiz.current.clientHeight;
+
 
     const delaunay = Delaunay.from( plottedPts );
     const voronoi = delaunay.voronoi( [ 5, 5, width - 5, height - 5 ] );
