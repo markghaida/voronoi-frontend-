@@ -55,7 +55,7 @@ canvas{
   position: relative;
   /* top: 25%; */
   max-width: 900px;
-  transition: box-shadow 0.05s, opacity 0.5s, backdrop-filter 0.5s, top 1.5s;
+  transition: box-shadow 0.05s, opacity 0.5s, backdrop-filter 0.5s, top 1.5s, padding 1s;
   /* background-color: white; */
   /* opacity: 0.5; */
   background-color: rgba(255, 255, 255, 0.2);
@@ -78,6 +78,7 @@ canvas{
   }
 
   #SearchBar {
+    height: 45px;
     bottom: 0;
     width: 100%;
     border-radius: 0px;
