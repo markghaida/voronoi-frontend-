@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import Keys from './Keys';
 
 
+
 const Search = ( { searchValue, setSearch, errors, lastReceipt, resultLength } ) => {
   useEffect( ( ) => {
     // searchInput.current.focus( );
@@ -9,33 +10,34 @@ const Search = ( { searchValue, setSearch, errors, lastReceipt, resultLength } )
   }, [ ] );
   // const [ input, setInput ] = useState( "" )
 
-  const handleChange = e => {
-    setSearch( e.target.value )
-  };
+  const handleChange = e => setSearch( e );
 
   const searchInput = useRef( );
 
-  let background;
-
-  if (lastReceipt !== searchValue && searchValue !== "") background = "0px 0px 5px rgb(0,200,0,1)"
-
-  if (resultLength === 0 && searchValue !== "") background = "0px 0px 5px rgb(200,0,0,1)"
+  const boxShadow = (
+    lastReceipt !== searchValue && searchValue !== "" ? "0px 0px 5px rgb(0,200,0,1)" :
+    resultLength === 0 && searchValue !== "" ? "0px 0px 5px rgb(200,0,0,1)" : null
+  );
 
   return(
-   <div id="SearchBar" style={ { boxShadow: background } }>
-     <input
-       ref={ searchInput }
-       value={ searchValue }
-       onChange={e => handleChange(e)}
-       placeholder="Search..."
-       type="text"
-       onTouchEnd={ e => { searchInput.current.blur( ); e.preventDefault( ); } }
-      //  onMouseEnter={ e => searchInput.current.focus() }
-      //  onMouseLeave={ e => searchInput.current.blur() }
-       />
-       <br></br>
+   <div id="SearchBar" style={ { boxShadow: boxShadow } }>
+    <div>
+      <input
+        ref={ searchInput }
+        value={ searchValue }
+        onChange={e => handleChange(e.target.value)}
+        placeholder="Search..."
+        type="text"
+        onTouchEnd={ e => { searchInput.current.blur( ); e.preventDefault( ); } }
+        />
+      <br></br>
       <p style={{color: "red"}}>{errors}</p>
-     <div style={{ width:"35px" }}></div>
+      <div style={{ width:"35px" }}></div>
+    </div>
+    <Keys
+      value={ searchValue }
+      onType={ handleChange }
+    />
    </div>
  );
 };
