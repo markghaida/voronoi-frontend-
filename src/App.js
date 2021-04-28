@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import Rhizom from './components/Rhizom.js';
 import Search from './components/Search.js';
+import Head from './components/Head.js';
 import { useEffect, useState } from 'react';
 import { timeFormatDefaultLocale } from 'd3';
 
@@ -68,6 +69,9 @@ function App( ){
 
   return (
     <div id="App">
+      <Head
+        resultLength={ bookmarks.length }
+      />
       <Search searchValue={ searchValue }
       setSearch={ setSearch }
       errors={ errors }
