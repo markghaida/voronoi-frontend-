@@ -5,9 +5,6 @@ import { Delaunay } from "d3-delaunay";
 
 
 
-const boolGEN = () => { if( Math.random( ) > 0.5 ) { return false } else { return true } };
-
-//update
 
 const Rhizom = ( { bookmarks } ) => {
 
@@ -118,7 +115,7 @@ const Rhizom = ( { bookmarks } ) => {
         let [ bW, bH ] = [ ( mark.score / highestScore ) * 300, ( mark.score / highestScore ) * 300 ];
         sizes.push( [ bW, bH ] );
         //----------
-        let bool = boolGEN();
+        let bool = Math.random( ) > 0.5 ? false : true;
         if( !bool ) xPos = width - xPos;
 
         if( i === 0 ) {

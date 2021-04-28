@@ -72,22 +72,6 @@ canvas{
 
 }
 
-@media screen and (max-width: 500px) /* Mobile */ {
-  :root {
-
-  }
-
-  #SearchBar {
-    height: 45px;
-    bottom: 0;
-    width: 100%;
-    border-radius: 0px;
-    position: absolute;
-    position: fixed;
-    /* height: calc( 35px +  ); */
-    padding-bottom: var(--safeAreaBtm);
-  }
-}
 
 
 .bookmarkHeader {
@@ -175,4 +159,27 @@ canvas{
   height: 100%;
   width: 100%;
   position: fixed;
+}
+
+@media screen and (max-width: 500px) /* Mobile */ {
+  :root {
+
+  }
+
+  #SearchBar {
+    height: 45px;
+    bottom: 0;
+    width: 100%;
+    border-radius: 0px;
+    position: absolute;
+    position: fixed;
+    /* height: calc( 35px +  ); */
+    padding-bottom: var(--safeAreaBtm);
+  }
+
+  #VoronoiContainer {
+    height: calc( 100% - var(--safeAreaBtm) - 45px );
+    top: 0;
+  }
+
 }
