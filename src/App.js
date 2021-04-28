@@ -1,8 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
-import Rhizom from './components/Rhizom.js';
-import Search from './components/Search.js';
-import Head from './components/Head.js';
+import Rhizom from './components/Rhizom';
+import Search from './components/Search';
+import Head from './components/Head';
 import { useEffect, useState } from 'react';
 import { timeFormatDefaultLocale } from 'd3';
 

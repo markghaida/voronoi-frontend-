@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
+import Keys from './Keys';
+
 
 const Search = ( { searchValue, setSearch, errors, lastReceipt, resultLength } ) => {
   useEffect( ( ) => {
@@ -21,7 +23,6 @@ const Search = ( { searchValue, setSearch, errors, lastReceipt, resultLength } )
 
   return(
    <div id="SearchBar" style={ { boxShadow: background } }>
-     <div style={{ width:"35px" }}></div>
      <input
        ref={ searchInput }
        value={ searchValue }
