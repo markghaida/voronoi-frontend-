@@ -23,7 +23,7 @@
 }
 
 #Head{
-  position: fixed;
+  position: absolute;
   display: flex;
   top: 0;
   width: 100%;
