@@ -29,7 +29,7 @@ const Search = ( { searchValue, setSearch, errors, lastReceipt, resultLength } )
        onChange={e => handleChange(e)}
        placeholder="Search..."
        type="text"
-       readOnly="readonly"
+       onTouchEnd={ e => { searchInput.current.blur( ); e.preventDefault( ); } }
       //  onMouseEnter={ e => searchInput.current.focus() }
       //  onMouseLeave={ e => searchInput.current.blur() }
        />
@@ -39,6 +39,6 @@ const Search = ( { searchValue, setSearch, errors, lastReceipt, resultLength } )
    </div>
  );
 };
-// onTouchEnd={ e => { searchInput.current.blur( ); e.preventDefault( ); } }
 
+// readOnly="readonly"
 export default Search;
