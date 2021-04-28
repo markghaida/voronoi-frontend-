@@ -100,7 +100,7 @@ const Rhizom = ( { bookmarks } ) => {
   useEffect( ( ) => {
     let width = rhiz.current.clientWidth;
     // let height = rhiz.current.clientHeight;
-    const height = width <= 500 ? rhiz.current.clientHeight*1.5 : rhiz.current.clientHeight;
+    const height = rhiz.current.clientHeight;
 
     // Array.from( { length: bookmarks.length }, ( ) => [ Math.random( ) * width, Math.random( ) * height ] )
     let first_X, leftMost, rightMost, topMost, bottomMost, highestScore;

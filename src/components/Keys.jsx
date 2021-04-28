@@ -10,7 +10,7 @@ const keysLayout = {
     'a s d f g h j k l',
     'z x c v b n m',
     '{space} {bksp}'
-  ]
+  ],
 };
 
 const Keys = ( { onType, value } ) => {
@@ -19,6 +19,7 @@ const Keys = ( { onType, value } ) => {
       <Keyboard
         onChange={ e =>{ console.log(e); onType(e)} }
         layout={ keysLayout }
+        display= { { '{bksp}': '<', '{space}': ' ' } }
       />
       </div>
     );
