@@ -20,7 +20,11 @@ const Search = ( { searchValue, setSearch, errors, lastReceipt, resultLength } )
   );
 
   return(
-   <div id="SearchBar" style={ { boxShadow: boxShadow } }>
+   <div
+     id="SearchBar"
+     style={ { boxShadow: boxShadow } }
+     onTouchEnd={ e => { searchInput.current.blur( ); e.preventDefault( ); } }
+     >
     <div>
       <input
         ref={ searchInput }
