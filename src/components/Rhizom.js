@@ -41,7 +41,7 @@ const Rhizom = ( { bookmarks } ) => {
     let width = rhiz.current.clientWidth;
     let height = rhiz.current.clientHeight;
     // height = window.innerHeight;
-    height = window.screen.height;
+    // height = window.screen.height;
 
     const delaunay = Delaunay.from( plottedPts );
     const voronoi = delaunay.voronoi( [ 5, 5, width - 5, height - 5 ] );
@@ -99,7 +99,9 @@ const Rhizom = ( { bookmarks } ) => {
   useEffect( ( ) => { make_voronio( ); }, [ ] );
   useEffect( ( ) => {
     let width = rhiz.current.clientWidth;
-    let height = rhiz.current.clientHeight;
+    // let height = rhiz.current.clientHeight;
+    const height = width <= 500 ? rhiz.current.clientHeight*1.5 : rhiz.current.clientHeight;
+
     // Array.from( { length: bookmarks.length }, ( ) => [ Math.random( ) * width, Math.random( ) * height ] )
     let first_X, leftMost, rightMost, topMost, bottomMost, highestScore;
     let sizes = [ ];

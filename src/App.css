@@ -75,7 +75,7 @@ canvas{
   display: flex;
   height: 35px;
   position: relative;
-  /* top: 25%; */
+  top: 25%;
   max-width: 900px;
   transition: box-shadow 0.05s, opacity 0.5s, backdrop-filter 0.5s, top 1.5s, padding 0.25s;
   /* background-color: white; */
@@ -83,6 +83,7 @@ canvas{
   background-color: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(20px) saturate(160%) contrast(45%) brightness(140%);
+  z-index: 100;
 }
 
 #SearchBar > input {
@@ -197,6 +198,7 @@ canvas{
     position: fixed;
     /* height: calc( 35px +  ); */
     padding-bottom: var(--safeAreaBtm);
+    top: auto;
   }
 
   #SearchBar:focus-within {
