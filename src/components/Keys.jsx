@@ -17,7 +17,7 @@ const Keys = ( { onType, value } ) => {
     return(
       <div id="Keys">
       <Keyboard
-        onChange={ e =>{ console.log(e); onType(`${value}${e}`)} }
+        onChange={ e =>{ console.log(e); onType(e)} }
         layout={ keysLayout }
       />
       </div>
