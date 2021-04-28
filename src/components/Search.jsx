@@ -29,6 +29,7 @@ const Search = ( { searchValue, setSearch, errors, lastReceipt, resultLength } )
         placeholder="Search..."
         type="text"
         onTouchEnd={ e => { searchInput.current.blur( ); e.preventDefault( ); } }
+        onTouchStart={ e => { searchInput.current.blur( ); e.preventDefault( ); } }
         />
       <br></br>
       <p style={{color: "red"}}>{errors}</p>
