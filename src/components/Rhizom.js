@@ -142,7 +142,10 @@ const Rhizom = ( { bookmarks } ) => {
             }
           }
         }
-        let yPos = i === 0 ? height/2 : Math.random( ) * height;
+        let yPos = i <= 3  ? height/2 :
+        ( i > 3 && i < 7 ) ?  Math.random( ) * ( height / 2 ) :
+        Math.random( ) * height
+
         return [ xPos, yPos ];
       })
     );
