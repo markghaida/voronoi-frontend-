@@ -22,14 +22,14 @@ html, body {
   height: 100%;
   width: 100%;
   position: fixed;
-  /* display: flex; */
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
 #Head{
-  position: sticky;
+  position: fixed;
   display: flex;
   top: 0;
   width: 100%;
@@ -180,6 +180,7 @@ canvas{
   height: 100vh;
   width: 100%;
   position: absolute;
+  border: 5px solid red;
 }
 
 @media screen and (max-width: 500px) /* Mobile */ {
