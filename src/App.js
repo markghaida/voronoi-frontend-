@@ -61,7 +61,7 @@ function App( ){
   }
   const [ errors, setErrors ] = useState( "" );
   const [ lastReceipt, setLastReceipt ] = useState( "" );
-  const [ searchValue, setSearch ] = useState( "po" );
+  const [ searchValue, setSearch ] = useState( "" );
   const [ bookmarks, setBookmarks ] = useState( [ ] );
   useEffect( ( ) => {
     getBookmarks( );

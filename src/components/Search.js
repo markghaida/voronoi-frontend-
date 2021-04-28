@@ -26,8 +26,7 @@ const Search = ( { searchValue, setSearch, errors, lastReceipt, resultLength } )
        ref={ searchInput }
        value={ searchValue }
        onChange={e => handleChange(e)}
-       onTouchEnd={ e => { searchInput.current.blur( ); e.preventDefault( ); } }
-       placeholder="Honey is yummy 🍯 ..."
+       placeholder="Search..."
        type="text"
       //  onMouseEnter={ e => searchInput.current.focus() }
       //  onMouseLeave={ e => searchInput.current.blur() }
@@ -38,5 +37,6 @@ const Search = ( { searchValue, setSearch, errors, lastReceipt, resultLength } )
    </div>
  );
 };
+// onTouchEnd={ e => { searchInput.current.blur( ); e.preventDefault( ); } }
 
 export default Search;
