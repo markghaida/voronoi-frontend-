@@ -18,7 +18,7 @@ html, body {
 
 #App {
   text-align: center;
-  height: 100vh;
+  height: 100%;
   width: 100%;
   position: fixed;
   display: flex;
@@ -66,6 +66,7 @@ canvas{
 }
 
 #SearchBar {
+  -webkit-tap-highlight-color:rgba(0,0,0,0);
   color: var(--mainColor);
   width: 80%;
   border-radius: 10px;
