@@ -10,6 +10,12 @@
   --borders: rgba( 255, 255, 255, 0.18 );
 }
 
+html, body {
+
+  height: 100vh;
+
+}
+
 
 #App {
   text-align: center;
