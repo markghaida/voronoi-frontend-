@@ -28,6 +28,7 @@ const Search = ( { searchValue, setSearch, errors, lastReceipt, resultLength } )
        onChange={e => handleChange(e)}
        placeholder="Search..."
        type="text"
+       readOnly="readonly"
       //  onMouseEnter={ e => searchInput.current.focus() }
       //  onMouseLeave={ e => searchInput.current.blur() }
        />
