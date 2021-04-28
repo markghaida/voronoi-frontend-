@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 
 const Search = ( { searchValue, setSearch, errors, lastReceipt, resultLength } ) => {
   useEffect( ( ) => {
-    searchInput.current.focus( );
+    // searchInput.current.focus( );
     document.addEventListener('keydown', e => {searchInput.current.focus( ) } );
   }, [ ] );
   // const [ input, setInput ] = useState( "" )
