@@ -191,6 +191,14 @@ canvas{
     padding-bottom: var(--safeAreaBtm);
   }
 
+  #SearchBar:focus-within {
+    box-shadow: 0px 0px 15px rgb(0,0,0,0.4);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(20px) saturate(160%) contrast(45%) brightness(140%);
+    padding-bottom: 0px;
+  }
+
+
   #VoronoiContainer {
     height: calc( 100vh - var(--safeAreaBtm) - 47px );
     top: 0;
