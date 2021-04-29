@@ -25,7 +25,7 @@ const Search = ( { searchValue, setSearch, errors, lastReceipt, resultLength } )
      style={ { boxShadow: boxShadow } }
      onTouchEnd={ e => { searchInput.current.blur( ); e.preventDefault( ); } }
      >
-    <div>
+    <div id="inputContainer">
       <input
         ref={ searchInput }
         value={ searchValue }
@@ -35,9 +35,11 @@ const Search = ( { searchValue, setSearch, errors, lastReceipt, resultLength } )
         onTouchEnd={ e => { searchInput.current.blur( ); e.preventDefault( ); } }
         onTouchStart={ e => { searchInput.current.blur( ); e.preventDefault( ); } }
         />
-      <br></br>
-      <p style={{color: "red"}}>{errors}</p>
-      <div style={{ width:"35px" }}></div>
+      <div
+        style={{ width:"35px" }}
+        onClick={ e=> setSearch("") }
+        onTouchEnd={ e=> setSearch("") }
+        >{"<x"}</div>
     </div>
     <Keys
       value={ searchValue }

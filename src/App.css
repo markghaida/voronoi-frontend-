@@ -95,6 +95,13 @@ canvas{
 
 }
 
+#inputContainer {
+  display: flex;
+  flex-direction: row;
+  height: 45px;
+  align-items: center;
+}
+
 #Keys {
   display: none;
 }
