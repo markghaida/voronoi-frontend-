@@ -187,7 +187,7 @@ canvas{
 =======
   /* z-index: 1; */
   backdrop-filter: blur(5px) brightness(200%);
-  /* backdrop-filter: blur(1px) brightness(100%); */
+  backdrop-filter: blur(1px) brightness(100%);
 
 >>>>>>> parent of 3da2709... updated y on best match and changed some styling
 }

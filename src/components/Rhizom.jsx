@@ -1,7 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
-// import BookmarkCard from '../components/BookmarkCard.js';
 import * as d3 from "d3";
-import { Delaunay } from "d3-delaunay";
+import {Delaunay} from "d3-delaunay";
 
 
 
@@ -84,16 +83,6 @@ const Rhizom = ( { bookmarks } ) => {
     </div>
     )
 
-  // const placeOnPlane = ( ) => {
-  //     return bookmarks.map( 
-  //     ( data, i ) => <BookmarkCard i={i} pt={plottedPts[i]} sizing={sizing[i]} 
-  //     data={data} best={bookmarks[0]} queryLen={bookmarks.length}
-  //   />
-  //   )
-  // }
-
-
-
   const rhiz = useRef( );
 
   useEffect( ( ) => { make_voronio( ); }, [ ] );
@@ -128,25 +117,24 @@ const Rhizom = ( { bookmarks } ) => {
         let yPos = Math.random( ) * height;
         // yPos = height/2;
         
-        if( i === 0 ) {
-          [ rightMost, leftMost ] = [ width/2 + bW/2 + 15, width/2 - bW/2 - 15 ]
-        }
+        if( !leftMost || !rightMost ) [ rightMost, leftMost ] = [ width/2 + bW/2 + 15, width/2 - bW/2 - 15 ];
         else{
           // console.log("right!!")
           if( bool ) {
             if( xPos + ( bW / 2 ) > leftMost ) {
-              xPos = leftMost - bW / 2;
-              leftMost = xPos - bW / 2 - 15;
-            } 
-            else leftMost = xPos - bW / 2 - 15;
+              xPos = leftMost - bW/2;
+              leftMost = xPos - bW/2 - 15;
+              console.log( ">>", leftMost );
+            } else {
+              leftMost = xPos - bW/2 - 15;
+            }
           }
+          
           else {
-            if( !bool ) {
-              if( xPos - ( bW / 2 ) < rightMost ) {
-                xPos      = rightMost + bW / 2;
-                rightMost = xPos + bW / 2 + 15;
-              } 
-              else rightMost = xPos + bW / 2 + 15;
+            if( !bool && xPos + ( bW / 2 ) < rightMost ) {
+              xPos      = rightMost + bW / 2;
+              rightMost = xPos + bW / 2 + 15;
+              console.log( ">>", leftMost );
             }
           }
         }
@@ -161,10 +149,6 @@ const Rhizom = ( { bookmarks } ) => {
       })  
     );
     setSizing( sizes );
-
-    const checkOthers = ( thisPt, otherPts ) => {
-
-    }
 
 
     // setPts( Array.from( { length: bookmarks.length }, ( ) => [ Math.random( ) * width, Math.random( ) * height ] ) );
