@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
 
@@ -16,6 +17,8 @@ html, body {
 }
 
 
+=======
+>>>>>>> parent of 3da2709... updated y on best match and changed some styling
 #App {
   text-align: center;
   height: 100%;
@@ -86,11 +89,14 @@ canvas{
   z-index: 100;
 }
 
+<<<<<<< HEAD
 #SearchBar > div > input {
   font-family: 'IBM Plex Mono', monospace;
   /* font-weight: bold; */
 }
 
+=======
+>>>>>>> parent of 3da2709... updated y on best match and changed some styling
 #SearchBar:before{
 
 }
@@ -114,8 +120,6 @@ canvas{
   max-height: 60px;
   overflow: hidden;
   margin: 0px 0px 5px 0px;
-  font-family: 'IBM Plex Mono', monospace;
-  font-weight: bold;
 }
 
 #SearchBar:focus-within {
@@ -161,17 +165,31 @@ canvas{
   margin: 0px;
   padding: 5px;
   background-color: rgba(255,255,255,0.2);
-  /* border-radius: 5px; */
+  border-radius: 5px;
+  /* position: absolute; */
+  /* min-width: 150px; */
+  /* max-width: 200px; */
+  /* max-height: 300px; */
   top: 50%;
   left: 50%;
+  /* opacity: 0.5; */
   -webkit-transform: translate(0%, -50%);
+  /* translateY(-50%); */
   border: 1px solid black;
   display: block;
   box-sizing: border-box;
   overflow: hidden;
+  /* transition: backdrop-filter 0.5s; */
   text-align: left;
   transition: box-shadow 0.25s, opacity 0.5s, backdrop-filter 0.5s, max-width 1.25s, max-height 1.25s, fontSize 1s;
+<<<<<<< HEAD
   backdrop-filter: blur(5px) brightness(200%);
+=======
+  /* z-index: 1; */
+  backdrop-filter: blur(5px) brightness(200%);
+  /* backdrop-filter: blur(1px) brightness(100%); */
+
+>>>>>>> parent of 3da2709... updated y on best match and changed some styling
 }
 
 .bookBody {
@@ -186,6 +204,11 @@ canvas{
   z-index: 100;
   box-shadow: 0px 0px 15px rgba(0,0,255,.2);
   backdrop-filter: blur(3px) brightness(300%);
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> parent of 3da2709... updated y on best match and changed some styling
   /* display: block; */
 }
 

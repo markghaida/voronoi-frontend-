@@ -65,13 +65,13 @@ const Rhizom = ( { bookmarks } ) => {
 
   const placeOnPlane = ( ) => plottedPts.map( ( pt, i ) =>
     <div className="datumPike" key={ bookmarks[i].url } style={{
-      left: ( pt[0] - 25 ) - sizing[i][0]/2,
-      top: pt[1]-25,
-      zIndex: bookmarks.length - i
+      left: ( pt[0] - 25 ) - sizing[i][0]/2, 
+      top: pt[1]-25, 
+      zIndex: bookmarks.length - i 
     }}>
       <div className="bookmarkBox" onClick={()=> window.open(bookmarks[i].url, "_blank")}
-        style={{
-          maxWidth: sizing[i][0],
+        style={{ 
+          maxWidth: sizing[i][0], 
           maxHeight: sizing[i][1],
         }}>
         <div className="bookmarkHeader" style={{
@@ -85,8 +85,8 @@ const Rhizom = ( { bookmarks } ) => {
     )
 
   // const placeOnPlane = ( ) => {
-  //     return bookmarks.map(
-  //     ( data, i ) => <BookmarkCard i={i} pt={plottedPts[i]} sizing={sizing[i]}
+  //     return bookmarks.map( 
+  //     ( data, i ) => <BookmarkCard i={i} pt={plottedPts[i]} sizing={sizing[i]} 
   //     data={data} best={bookmarks[0]} queryLen={bookmarks.length}
   //   />
   //   )
@@ -99,10 +99,15 @@ const Rhizom = ( { bookmarks } ) => {
   useEffect( ( ) => { make_voronio( ); }, [ ] );
   useEffect( ( ) => {
     let width = rhiz.current.clientWidth;
+<<<<<<< HEAD:src/components/Rhizom.jsx
     // let height = rhiz.current.clientHeight;
     const height = rhiz.current.clientHeight;
+=======
+    let height = rhiz.current.clientHeight;
+>>>>>>> parent of 3da2709... updated y on best match and changed some styling:src/components/Rhizom.js
 
     // Array.from( { length: bookmarks.length }, ( ) => [ Math.random( ) * width, Math.random( ) * height ] )
+    
     let first_X, leftMost, rightMost, topMost, bottomMost, highestScore;
     let sizes = [ ];
     if( bookmarks[0] ) highestScore = bookmarks[0].score;
@@ -120,7 +125,9 @@ const Rhizom = ( { bookmarks } ) => {
         //----------
         let bool = Math.random( ) > 0.5 ? false : true;
         if( !bool ) xPos = width - xPos;
-
+        let yPos = Math.random( ) * height;
+        // yPos = height/2;
+        
         if( i === 0 ) {
           [ rightMost, leftMost ] = [ width/2 + bW/2 + 15, width/2 - bW/2 - 15 ]
         }
@@ -130,7 +137,7 @@ const Rhizom = ( { bookmarks } ) => {
             if( xPos + ( bW / 2 ) > leftMost ) {
               xPos = leftMost - bW / 2;
               leftMost = xPos - bW / 2 - 15;
-            }
+            } 
             else leftMost = xPos - bW / 2 - 15;
           }
           else {
@@ -138,17 +145,20 @@ const Rhizom = ( { bookmarks } ) => {
               if( xPos - ( bW / 2 ) < rightMost ) {
                 xPos      = rightMost + bW / 2;
                 rightMost = xPos + bW / 2 + 15;
-              }
+              } 
               else rightMost = xPos + bW / 2 + 15;
             }
           }
         }
+<<<<<<< HEAD:src/components/Rhizom.jsx
         let yPos = i <= 3  ? height/2 :
         ( i > 3 && i < 7 ) ?  Math.random( ) * ( height / 2 ) :
         Math.random( ) * height
 
+=======
+>>>>>>> parent of 3da2709... updated y on best match and changed some styling:src/components/Rhizom.js
         return [ xPos, yPos ];
-      })
+      })  
     );
     setSizing( sizes );
 

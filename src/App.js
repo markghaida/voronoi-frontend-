@@ -6,8 +6,7 @@ import Head from './components/Head';
 import { useEffect, useState } from 'react';
 import { timeFormatDefaultLocale } from 'd3';
 
-// const backend = 'http://localhost:3000/bookmarks';
-const backend = 'https://honeycomb-app.herokuapp.com/bookmarks';
+const backend = 'http://localhost:3000/bookmarks';
 
 function App( ){
 
@@ -18,7 +17,7 @@ function App( ){
       return setBookmarks( [ ] );
     }
     let res = searchValue.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
-    if( res !== null ){
+    if( res !== null ){ 
       console.log("fetching this bookmark now")
       fetch(backend, {
       method: 'POST',
@@ -26,7 +25,7 @@ function App( ){
         'Content-Type': 'application/json',
       },
       body: JSON.stringify( { url: searchValue } ),
-      } )
+      })
       .then( response => response.json( ) )
       .then( data => {
         console.log( 'Success:', data );
@@ -38,7 +37,7 @@ function App( ){
           // setErrors( data[ 0 ] )
         }
 
-
+        
         // else{
         //   filteredList( data )
         // }
@@ -54,11 +53,11 @@ function App( ){
       .then( response => { setLastReceipt( response.search ); filteredList( response.bookmarks ); } );
     }
   }
-
+  
   const filteredList = ( bookmarkList ) => {
     let filteredBookmarks = bookmarkList.filter( ( bookmark ) => bookmark.score > 9 )
     setBookmarks( filteredBookmarks );
-  }
+  } 
   const [ errors, setErrors ] = useState( "" );
   const [ lastReceipt, setLastReceipt ] = useState( "" );
   const [ searchValue, setSearch ] = useState( "" );
@@ -73,9 +72,9 @@ function App( ){
         resultLength={ bookmarks.length }
       />
       <Search searchValue={ searchValue }
-      setSearch={ setSearch }
-      errors={ errors }
-      lastReceipt={ lastReceipt }
+      setSearch={ setSearch } 
+      errors={ errors } 
+      lastReceipt={ lastReceipt } 
       resultLength={ bookmarks.length }
       />
       <Rhizom bookmarks={ bookmarks }/>
