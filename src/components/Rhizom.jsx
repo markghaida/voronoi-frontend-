@@ -5,9 +5,6 @@ import { Delaunay } from "d3-delaunay";
 
 
 
-const boolGEN = () => { if( Math.random( ) > 0.5 ) { return false } else { return true } };
-
-//update
 
 const Rhizom = ( { bookmarks } ) => {
 
@@ -43,6 +40,8 @@ const Rhizom = ( { bookmarks } ) => {
 
     let width = rhiz.current.clientWidth;
     let height = rhiz.current.clientHeight;
+    // height = window.innerHeight;
+    // height = window.screen.height;
 
     const delaunay = Delaunay.from( plottedPts );
     const voronoi = delaunay.voronoi( [ 5, 5, width - 5, height - 5 ] );
@@ -100,7 +99,9 @@ const Rhizom = ( { bookmarks } ) => {
   useEffect( ( ) => { make_voronio( ); }, [ ] );
   useEffect( ( ) => {
     let width = rhiz.current.clientWidth;
-    let height = rhiz.current.clientHeight;
+    // let height = rhiz.current.clientHeight;
+    const height = rhiz.current.clientHeight;
+
     // Array.from( { length: bookmarks.length }, ( ) => [ Math.random( ) * width, Math.random( ) * height ] )
     let first_X, leftMost, rightMost, topMost, bottomMost, highestScore;
     let sizes = [ ];
@@ -117,7 +118,7 @@ const Rhizom = ( { bookmarks } ) => {
         let [ bW, bH ] = [ ( mark.score / highestScore ) * 300, ( mark.score / highestScore ) * 300 ];
         sizes.push( [ bW, bH ] );
         //----------
-        let bool = boolGEN();
+        let bool = Math.random( ) > 0.5 ? false : true;
         if( !bool ) xPos = width - xPos;
 
         if( i === 0 ) {
@@ -142,7 +143,10 @@ const Rhizom = ( { bookmarks } ) => {
             }
           }
         }
-        let yPos = i === 0 ? height/2 : Math.random( ) * height;
+        let yPos = i <= 3  ? height/2 :
+        ( i > 3 && i < 7 ) ?  Math.random( ) * ( height / 2 ) :
+        Math.random( ) * height
+
         return [ xPos, yPos ];
       })
     );

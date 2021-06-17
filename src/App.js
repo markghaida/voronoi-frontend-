@@ -1,7 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
-import Rhizom from './components/Rhizom.js';
-import Search from './components/Search.js';
+import Rhizom from './components/Rhizom';
+import Search from './components/Search';
+import Head from './components/Head';
 import { useEffect, useState } from 'react';
 import { timeFormatDefaultLocale } from 'd3';
 
@@ -60,7 +61,7 @@ function App( ){
   }
   const [ errors, setErrors ] = useState( "" );
   const [ lastReceipt, setLastReceipt ] = useState( "" );
-  const [ searchValue, setSearch ] = useState( "po" );
+  const [ searchValue, setSearch ] = useState( "" );
   const [ bookmarks, setBookmarks ] = useState( [ ] );
   useEffect( ( ) => {
     getBookmarks( );
@@ -68,6 +69,9 @@ function App( ){
 
   return (
     <div id="App">
+      <Head
+        resultLength={ bookmarks.length }
+      />
       <Search searchValue={ searchValue }
       setSearch={ setSearch }
       errors={ errors }
