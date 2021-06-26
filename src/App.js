@@ -59,11 +59,7 @@ function App( ){
   } 
   const [ errors, setErrors ] = useState( "" );
   const [ lastReceipt, setLastReceipt ] = useState( "" );
-<<<<<<< HEAD
   const [ searchValue, setSearch ] = useState( "" );
-=======
-  const [ searchValue, setSearch ] = useState( "ga" );
->>>>>>> parent of 01f9fc5... Merge pull request #1 from markghaida/stretch
   const [ bookmarks, setBookmarks ] = useState( [ ] );
   useEffect( ( ) => {
     getBookmarks( );
