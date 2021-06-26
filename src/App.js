@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { timeFormatDefaultLocale } from 'd3';
 
 const backend = 'http://localhost:3000/bookmarks';
+// const backend = 'https://honeycomb-app.herokuapp.com/bookmarks';
 
 function App( ){
 
@@ -36,11 +37,6 @@ function App( ){
         if(data[0] === "Url has already been taken"){
           // setErrors( data[ 0 ] )
         }
-
-        
-        // else{
-        //   filteredList( data )
-        // }
       })
     }else{
       console.log("filtering based off of your input")
@@ -50,14 +46,12 @@ function App( ){
         body: JSON.stringify( { search: searchValue } )
         } )
       .then( response => response.json( ) )
-      .then( response => { setLastReceipt( response.search ); 
-        filteredList( response.bookmarks );
-        // console.log(response.bookmarks);
-       } );
+      .then( response => {  setLastReceipt( response.search ); filteredList( response.bookmarks ); } );
     }
   }
   
   const filteredList = ( bookmarkList ) => {
+    console.log(bookmarkList)
     let filteredBookmarks = bookmarkList.filter( ( bookmark ) => bookmark.score > 9 )
     setBookmarks( filteredBookmarks );
   } 
