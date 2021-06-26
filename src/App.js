@@ -50,7 +50,10 @@ function App( ){
         body: JSON.stringify( { search: searchValue } )
         } )
       .then( response => response.json( ) )
-      .then( response => { setLastReceipt( response.search ); filteredList( response.bookmarks ); } );
+      .then( response => { setLastReceipt( response.search ); 
+        filteredList( response.bookmarks );
+        // console.log(response.bookmarks);
+       } );
     }
   }
   
@@ -68,9 +71,9 @@ function App( ){
 
   return (
     <div id="App">
-      <Head
+      {/* <Head
         resultLength={ bookmarks.length }
-      />
+      /> */}
       <Search searchValue={ searchValue }
       setSearch={ setSearch } 
       errors={ errors } 

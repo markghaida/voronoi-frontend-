@@ -99,12 +99,7 @@ const Rhizom = ( { bookmarks } ) => {
   useEffect( ( ) => { make_voronio( ); }, [ ] );
   useEffect( ( ) => {
     let width = rhiz.current.clientWidth;
-<<<<<<< HEAD:src/components/Rhizom.jsx
-    // let height = rhiz.current.clientHeight;
-    const height = rhiz.current.clientHeight;
-=======
     let height = rhiz.current.clientHeight;
->>>>>>> parent of 3da2709... updated y on best match and changed some styling:src/components/Rhizom.js
 
     // Array.from( { length: bookmarks.length }, ( ) => [ Math.random( ) * width, Math.random( ) * height ] )
     
@@ -150,13 +145,6 @@ const Rhizom = ( { bookmarks } ) => {
             }
           }
         }
-<<<<<<< HEAD:src/components/Rhizom.jsx
-        let yPos = i <= 3  ? height/2 :
-        ( i > 3 && i < 7 ) ?  Math.random( ) * ( height / 2 ) :
-        Math.random( ) * height
-
-=======
->>>>>>> parent of 3da2709... updated y on best match and changed some styling:src/components/Rhizom.js
         return [ xPos, yPos ];
       })  
     );
