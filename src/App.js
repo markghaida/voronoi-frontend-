@@ -5,8 +5,8 @@ import Search from './components/Search.js';
 import { useEffect, useState } from 'react';
 import { timeFormatDefaultLocale } from 'd3';
 
-const backend = 'http://localhost:3000/bookmarks';
-// const backend = 'https://honeycomb-app.herokuapp.com/bookmarks';
+// const backend = 'http://localhost:3000/bookmarks';
+const backend = 'https://honeycomb-app.herokuapp.com/bookmarks';
 
 function App( ){
 
@@ -32,7 +32,6 @@ function App( ){
 
         // I have to first determine if the data returned is coming
         //back as an error
-        setAdjList(data)
         setSearch("")
         if(data[0] === "Url has already been taken"){
           // setErrors( data[ 0 ] )
@@ -62,7 +61,6 @@ function App( ){
   const [ lastReceipt, setLastReceipt ] = useState( "" );
   const [ searchValue, setSearch ] = useState( "" );
   const [ bookmarks, setBookmarks ] = useState( [ ] );
-  const [ adjList, setAdjList ] = useState ( {} );
   useEffect( ( ) => {
     getBookmarks( );
   }, [ searchValue ] );
