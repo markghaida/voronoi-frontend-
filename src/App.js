@@ -33,6 +33,7 @@ function App( ){
 
         // I have to first determine if the data returned is coming
         //back as an error
+        setSearch("")
         if(data[0] === "Url has already been taken"){
           setErrors( data[ 0 ] )
         }else{
