@@ -6,8 +6,8 @@ import Head from './components/Head';
 import { useEffect, useState } from 'react';
 import { timeFormatDefaultLocale } from 'd3';
 
-const backend = 'http://localhost:3000/bookmarks';
-// const backend = 'https://honeycomb-app.herokuapp.com/bookmarks';
+// const backend = 'http://localhost:3000/bookmarks';
+const backend = 'https://honeycomb-app.herokuapp.com/bookmarks';
 
 function App( ){
 
@@ -18,9 +18,8 @@ function App( ){
       return setBookmarks( [ ] );
     }
     let res = searchValue.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
-    if( res !== null ){
-      
-      console.log("fetching this bookmark now")
+    if( res !== null ){ 
+      console.log("saving this bookmark now")
       fetch(backend, {
       method: 'POST',
       headers: {
@@ -41,14 +40,17 @@ function App( ){
         }
       })
     }else{
-      console.log("filtering based off of your input")
+      console.log("filtering based off of your search")
+      // debugger 
       fetch( `${ backend }/search`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify( { search: searchValue } )
+        body: JSON.stringify( { search: searchValue,  objList: adjList} )
         } )
       .then( response => response.json( ) )
       .then( response => {  setLastReceipt( response.search ); filteredList( response.bookmarks ); } );
+      // .then( response => console.log(response));
+      // debugger 
     }
   }
   
