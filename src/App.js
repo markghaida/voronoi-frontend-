@@ -46,7 +46,7 @@ function App( ){
       fetch( `${ backend }/search`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify( { search: searchValue,  objList: adjList} )
+        body: JSON.stringify( { search: searchValue } )
         } )
       .then( response => response.json( ) )
       .then( response => {  setLastReceipt( response.search ); filteredList( response.bookmarks ); } );
