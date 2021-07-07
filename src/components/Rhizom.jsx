@@ -1,152 +1,136 @@
 import { useEffect, useState, useRef } from 'react';
 import * as d3 from "d3";
 import {Delaunay} from "d3-delaunay";
+import BookmarkCard from "./BookmarkCard";
 
 
 
 
 const Rhizom = ( { bookmarks } ) => {
 
+  //VoronoiContainer
   const [ vContext, setContext ] = useState( null );
-  const [ plottedPts, setPts ] = useState( [ ] );
-  const [ sizing, setSizing ] = useState( [ ] );
-  const [ plottedBookmarks, setFloatingBookmarks ] = useState( [ ] );
+  const [ canvasElem, setCanvasElem ] = useState( null );
+  const [ graphedBookmarks, setGraphMap ] = useState( [ ] ); //NEW
+  const [ windowSize, setWindowSize ] = useState({ width: undefined, height: undefined });
 
-  const make_voronio = ( ) => {
-    let width = window.innerWidth;
-    let height = window.innerHeight;
-    width = rhiz.current.clientWidth;
-    height = rhiz.current.clientHeight;
-    console.log(width,height);
-    const canvas = d3.select( rhiz.current ).append("canvas")
-    const context = canvas.node().getContext("2d"); //https://stackoverflow.com/questions/38340082/d3-svg-not-rendering-on-initial-component-render-react
-    canvas.attr('width', width);
-    canvas.attr('height', height);
-    // canvas.attr('position', "absolute");
-    setContext( context );
-    // setLoci(particles)
+  useEffect( ( ) => {
+    const handleResize = ( ) => setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+    window.addEventListener( "resize", handleResize );
+    handleResize( );
+    return ( ) => window.removeEventListener( "resize", handleResize );
+  }, [ ] );
 
-    update( );
-    // context.canvas.onmousemove = event => {
-    //   event.preventDefault();
-    //   particles[0] = [event.layerX, event.layerY];
-    //   update();
-    // };
+  const make_voronoi = ( ) => {
+    const canvas = d3.select( rhiz.current ).append( "canvas" );
+    const context = canvas.node( ).getContext( "2d" ); //https://stackoverflow.com/questions/38340082/d3-svg-not-rendering-on-initial-component-render-react
+    canvas.attr('width', windowSize.width);
+    canvas.attr('height', windowSize.height);
+    setContext( context ); setCanvasElem( canvas ); update( );
+    // context.canvas.onmousemove = event => { event.preventDefault(); particles[0] = [event.layerX, event.layerY]; update(); };
   };
 
-  const update = ( ) => { //https://observablehq.com/@d3/hover-voronoi?collection=@d3/d3-delaunay <<<<!!!!
+  const update_canvas_size = ( ) => {
+    if( !canvasElem ) return;
+    canvasElem.attr('width', windowSize.width);
+    canvasElem.attr('height', windowSize.height);
+    update( );
+  };
+
+  useEffect( ( ) => update_canvas_size( ), [ windowSize ] );
+
+  const update = ( ) => { //https://observablehq.com/@d3/hover-voronoi?collection=@d3/d3-delaunay
     if( !vContext ) return
-
-    let width = rhiz.current.clientWidth;
-    let height = rhiz.current.clientHeight;
-    // height = window.innerHeight;
-    // height = window.screen.height;
-
-    const delaunay = Delaunay.from( plottedPts );
-    const voronoi = delaunay.voronoi( [ 5, 5, width - 5, height - 5 ] );
-    vContext.clearRect(0,0,width,height);
-    vContext.beginPath();
-    delaunay.render(vContext);
+    const pointArray = graphedBookmarks.map( item => [ item.position.x, item.position.y ] );
+    const delaunay = Delaunay.from( pointArray );
+    const voronoi = delaunay.voronoi( [ 5, 5, windowSize.width - 5, windowSize.height - 5 ] );
+    vContext.clearRect( 0, 0, windowSize.width, windowSize.height );
+    vContext.beginPath( );
+    delaunay.render( vContext );
     vContext.strokeStyle = "rgb(240,240,240)";
-    vContext.stroke();
+    vContext.stroke( );
 
-    vContext.beginPath();
-    voronoi.render(vContext);
-    voronoi.renderBounds(vContext);
+    vContext.beginPath( );
+    voronoi.render( vContext );
+    voronoi.renderBounds( vContext );
     vContext.strokeStyle = "rgb(190,190,190)";
-    vContext.stroke();
+    vContext.stroke( );
 
-    vContext.beginPath();
+    vContext.beginPath( );
     delaunay.renderPoints(vContext);
-    vContext.fill();
+    vContext.fill( );
     // delaunay.renderPoints( context );
   }
 
-  const placeOnPlane = ( ) => plottedPts.map( ( pt, i ) =>
-    <div className="datumPike" key={ bookmarks[i].url } style={{
-      left: ( pt[0] - 25 ) - sizing[i][0]/2, 
-      top: pt[1]-25, 
-      zIndex: bookmarks.length - i 
-    }}>
-      <div className="bookmarkBox" onClick={()=> window.open(bookmarks[i].url, "_blank")}
-        style={{ 
-          maxWidth: sizing[i][0], 
-          maxHeight: sizing[i][1],
-        }}>
-        <div className="bookmarkHeader" style={{
-          fontSize:`${(bookmarks[i].score/bookmarks[0].score*14)+6}px`
-          }}>
-          { bookmarks[i].h1 }</div>
-        <img className="bookMarkGlyph" src={ bookmarks[ i ].image }/>
-          <p className="bookBody">{ bookmarks[i].body }</p>
+  const mappedElems = graphedBookmarks.map( ( mark, i ) =>
+    <div className="datumPike" key={ mark.data.url } style={{ left: ( mark.position.x - 25 ) - mark.size.w/2, top: mark.position.y-25, zIndex: graphedBookmarks.length - i }}>
+      <div className="bookmarkBox" onClick={()=> window.open(mark.data.url, "_blank")} style={{ maxWidth: mark.size.w, maxHeight: mark.size.h }}>
+        <div className="bookmarkHeader" style={{ fontSize:`${(mark.data.score/graphedBookmarks[0].score*14)+6}px` }}>
+          { mark.data.h1 }</div>
+        <img className="bookMarkGlyph" src={ mark.data.image }/>
+        <p className="bookBody">{ mark.data.body }</p>
       </div>
     </div>
-    )
+  );
+
+
+  useEffect( ( ) => make_voronoi( ), [ ] );
+
+  const graph_bookmarks = ( ) => {
+
+    let first_X, leftMost, rightMost, topMost, bottomMost, highestScore;
+    if( bookmarks[0] ) highestScore = bookmarks[0].score;
+
+    const graphing_data = bookmarks.map( ( mark, i ) => {
+      //Our output format
+      const elem = { data: mark, position: { x: null, y: null }, size: { w: null, h: null } };
+
+      /*
+      xStrength determines position on the x axis. We use the order of our search result as they are in order of search relevance.
+      HOW: it's a percentage of how close to the center of the screen the element will display.
+      WHY:  because we want the most relevant to appear the most centered.
+      */
+      let xStrength = (bookmarks.length - i) / bookmarks.length;
+
+      //converting xStrength to screen centered-ness
+      let xPos = ( xStrength * windowSize.width ) / 2;
+
+      [ elem.size.w, elem.size.h ] = [ ( mark.score / highestScore ) * 300, ( mark.score / highestScore ) * 300 ];
+
+      //NOT FINISHED
+
+      /*
+      bool alternates the placement from left and right.
+      TRUE = left, FALSE = right
+      */
+      let bool = Math.random( ) > 0.5 ? false : true;
+
+      if( !bool ) xPos = windowSize.width - xPos;
+      let yPos = Math.random( ) * windowSize.height;
+      // let yPos = height/2;
+      if( !leftMost || !rightMost ) [ rightMost, leftMost ] = [ windowSize.width/2 + elem.size.w/2 + 15, windowSize.width/2 - elem.size.w/2 - 15 ];
+      else {
+        if( bool ) {
+          if( xPos + ( elem.size.w / 2 ) > leftMost ) [ xPos, leftMost  ] = [ leftMost - elem.size.w/2, xPos - elem.size.w/2 - 15 ];
+          else leftMost = xPos - elem.size.w/2 - 15;
+        }
+        else if( !bool && xPos + ( elem.size.w / 2 ) < rightMost ) [ xPos, rightMost ] = [ rightMost + elem.size.w / 2, xPos + elem.size.w / 2 + 15 ];
+      };
+      [ elem.position.x, elem.position.y ] = [ xPos, yPos ];
+      return elem;
+    } );
+    setGraphMap( graphing_data );
+    update( );
+  };
+  useEffect( ( ) => graph_bookmarks( ), [ bookmarks ] );
 
   const rhiz = useRef( );
 
-  useEffect( ( ) => { make_voronio( ); }, [ ] );
-  useEffect( ( ) => {
-    let width = rhiz.current.clientWidth;
-    let height = rhiz.current.clientHeight;
-
-    // Array.from( { length: bookmarks.length }, ( ) => [ Math.random( ) * width, Math.random( ) * height ] )
-    
-    let first_X, leftMost, rightMost, topMost, bottomMost, highestScore;
-    let sizes = [ ];
-    if( bookmarks[0] ) highestScore = bookmarks[0].score;
-
-    setPts(
-      bookmarks.map( ( mark, i ) => {
-        let xStrength = (bookmarks.length - i) / bookmarks.length;
-        // console.log( xStrength );
-        let xPos = (xStrength * width) / 2;
-        // console.log( xPos );
-        console.log( mark.score );
-        //----------
-        let [ bW, bH ] = [ ( mark.score / highestScore ) * 300, ( mark.score / highestScore ) * 300 ];
-        sizes.push( [ bW, bH ] );
-        //----------
-        let bool = Math.random( ) > 0.5 ? false : true;
-        if( !bool ) xPos = width - xPos;
-        let yPos = Math.random( ) * height;
-        // yPos = height/2;
-        
-        if( !leftMost || !rightMost ) [ rightMost, leftMost ] = [ width/2 + bW/2 + 15, width/2 - bW/2 - 15 ];
-        else{
-          // console.log("right!!")
-          if( bool ) {
-            if( xPos + ( bW / 2 ) > leftMost ) {
-              xPos = leftMost - bW/2;
-              leftMost = xPos - bW/2 - 15;
-              console.log( ">>", leftMost );
-            } else {
-              leftMost = xPos - bW/2 - 15;
-            }
-          }
-          
-          else {
-            if( !bool && xPos + ( bW / 2 ) < rightMost ) {
-              xPos      = rightMost + bW / 2;
-              rightMost = xPos + bW / 2 + 15;
-              console.log( ">>", leftMost );
-            }
-          }
-        }
-        return [ xPos, yPos ];
-      })  
-    );
-    setSizing( sizes );
-
-
-    // setPts( Array.from( { length: bookmarks.length }, ( ) => [ Math.random( ) * width, Math.random( ) * height ] ) );
-  }, [ bookmarks ] );
-  useEffect( ( ) => { update( ); setFloatingBookmarks(placeOnPlane)}, [ plottedPts ] );
-  // { allBookmarks }
+  update( );
   return(
     <div id="VoronoiContainer">
       <div id="vShell" ref={ rhiz }/>
-      { plottedBookmarks }
+      { mappedElems }
     </div>
   );
 };
