@@ -1,27 +1,23 @@
 import { useEffect, useRef, useState } from 'react';
 
-const Search = ( { searchValue, setSearch, errors, lastReceipt, resultLength } ) => {
-  useEffect( ( ) => {
-    searchInput.current.focus( );
-  }, [ ] );
-  // const [ input, setInput ] = useState( "" )
 
-  const handleChange = e => {
-    setSearch( e.target.value )
-  };
+const fetchGradientGraphic = 'linear-gradient(90deg,var(--AOS_Bg), var(--AOS_Bg), var(--AOS_Bg), var(--AOS_Accent), var(--AOS_Bg),var(--AOS_Bg),var(--AOS_Bg) )';
+const errorGradientGraphic = 'linear-gradient(90deg,var(--AOS_Bg), var(--AOS_Bg), var(--AOS_Bg), rgba(255,0,0,0.2), var(--AOS_Bg),var(--AOS_Bg),var(--AOS_Bg) )';
+
+const Search = ( { searchValue, setSearch, errors, lastReceipt, resultLength } ) => {
+
+
+  const handleChange = e => setSearch( e.target.value );
 
   const searchInput = useRef( );
-  
-  let background; 
-  
-  if (lastReceipt !== searchValue && searchValue !== "") background = "0px 0px 5px rgb(0,200,0,1)"
+  useEffect( ( ) => searchInput.current.focus( ), [ ] );
 
-  if (resultLength === 0 && searchValue !== "") background = "0px 0px 5px rgb(200,0,0,1)"
+  let boxShadow, backgroundImage, animation;
+  if ( lastReceipt !== searchValue && searchValue !== "") [ boxShadow, backgroundImage, animation ] = [ "inset 0px 0px 5px rgb(0,200,0,1)", fetchGradientGraphic, 'gradientBG 1s ease infinite' ];
+  if ( resultLength === 0 && searchValue !== "") [ boxShadow, backgroundImage, animation ] = [ "inset 0px 0px 5px rgb(200,0,0,1)", errorGradientGraphic, 'gradientBG 3s ease infinite' ];
 
-  let top = "0%";
-  if( searchValue ) top = "25%";
-  return(
-   <div id="SearchBar" style={{boxShadow: background, top: top}}>
+  let top = "25%";
+  return <div id="SearchBar" style={{boxShadow: boxShadow, backgroundImage: backgroundImage, top: top, animation: animation}}>
      <div style={{ width:"35px" }}></div>
      <input
        ref={ searchInput }
@@ -29,14 +25,11 @@ const Search = ( { searchValue, setSearch, errors, lastReceipt, resultLength } )
        onChange={e => handleChange(e)}
        placeholder="Honeycomb 🍯..."
        type="text"
-      //  onMouseEnter={ e => searchInput.current.focus() }
-      //  onMouseLeave={ e => searchInput.current.blur() }
        />
-       <br></br>
+      <br/>
       <p style={{color: "red"}}>{errors}</p>
      <div style={{ width:"35px" }}></div>
-   </div>
- );
+   </div>;
 };
 
 export default Search;
